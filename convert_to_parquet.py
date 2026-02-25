@@ -6,6 +6,8 @@ import re
 from pathlib import Path
 import tempfile
 import shutil
+import gc
+import time
 
 def load_schema(schema_path):
     column_names = []
@@ -39,6 +41,29 @@ def load_schema(schema_path):
                 
     return column_names, read_dtypes, cast_dtypes
 
+def _sink_csv_to_parquet(csv_path, parquet_path, columns, read_dtypes, cast_dtypes):
+    """Scoped helper so lazy_df is released when this function returns, freeing file handles."""
+    lazy_df = pl.scan_csv(
+        csv_path,
+        separator='|',
+        has_header=False,
+        encoding='utf8-lossy',
+        new_columns=columns,
+        schema_overrides=read_dtypes,
+        quote_char=None # Data contains unescaped quotes like "나"동
+    )
+    # Apply Decimal casts lazily
+    exprs = [pl.col(col).cast(dtype, strict=False) for col, dtype in cast_dtypes.items()]
+    if exprs:
+        lazy_df = lazy_df.with_columns(exprs)
+    # Sink to Parquet. This streams the file chunk by chunk without entirely loading into memory!
+    lazy_df.sink_parquet(parquet_path)
+
+    # Polars holds the file handle open past sink_parquet()
+    del lazy_df
+    gc.collect()
+    time.sleep(10)  # Allow Polars Rust threads to release file handles on Windows
+
 def convert_to_parquet():
     base_dir = Path(r'e:/국건위-auri/2026 국건위 업무(안의순)/10. 기획단 업무/도심형 블록주택(도심주택)/0223_세움터 데이터 분석')
     catalog_path = base_dir / 'data' / 'dataset_catalog.json'
@@ -65,46 +90,20 @@ def convert_to_parquet():
         
         # Polars Lazy API out-of-core processing works best on uncompressed files
         # We extract the file to a temporary location, process it with scan_csv(), sink_parquet()
-        temp_dir = tempfile.mkdtemp(dir=base_dir/'data')
-        try:
-            with zipfile.ZipFile(zip_path, 'r') as z:
-                target_file = z.namelist()[0]
-                print(f"  Extracting {target_file} to temporary folder...")
-                z.extract(target_file, path=temp_dir)
-                extracted_txt_path = Path(temp_dir) / target_file
-                
-                print(f"  Converting to parquet out-of-core...")
-                
-                # Setup out-of-core lazy execution
-                lazy_df = pl.scan_csv(
-                    extracted_txt_path,
-                    separator='|',
-                    has_header=False,
-                    encoding='utf8-lossy',
-                    new_columns=columns,
-                    schema_overrides=read_dtypes,
-                    truncate_ragged_lines=True,
-                    ignore_errors=True # Ignore lines that are severely malformed
-                )
-                
-                # Apply Decimal casts lazily
-                exprs = []
-                for col, dtype in cast_dtypes.items():
-                    exprs.append(pl.col(col).cast(dtype, strict=False))
+        with tempfile.TemporaryDirectory(dir=base_dir/'data') as temp_dir:
+            try:
+                with zipfile.ZipFile(zip_path, 'r') as z:
+                    target_file = z.namelist()[0]
+                    print(f"  Extracting {target_file} to temporary folder...")
+                    z.extract(target_file, path=temp_dir)
+                    extracted_txt_path = Path(temp_dir) / target_file
                     
-                if exprs:
-                    lazy_df = lazy_df.with_columns(exprs)
-                
-                # Sink to Parquet. This streams the file chunk by chunk without entirely loading into memory!
-                lazy_df.sink_parquet(out_parquet_path)
-                
+                print(f"  Converting to parquet out-of-core...")
+                _sink_csv_to_parquet(extracted_txt_path, out_parquet_path, columns, read_dtypes, cast_dtypes)
                 print(f"  Successfully saved -> {out_parquet_path.name}")
                 
-        except Exception as e:
-            print(f"  Failed processing {dataset_name}: {e}")
-        finally:
-            print('  Removing temporary text file...')
-            shutil.rmtree(temp_dir)
+            except Exception as e:
+                print(f"  Failed processing {dataset_name}: {e}")
             
 if __name__ == "__main__":
     convert_to_parquet()
