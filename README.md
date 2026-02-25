@@ -56,6 +56,7 @@ python convert_to_parquet.py
 |---|---|
 | `build_catalog.py` | zip ↔ schema 매핑 카탈로그 생성 |
 | `convert_to_parquet.py` | zip → parquet 일괄 변환 |
+| `show_parquet.py` | 변환된 전체 parquet 파일들의 스키마 및 샘플 데이터 연속 조회 |
 | `analyze_structure.py` | parquet 스키마/샘플 확인 |
 | `tests/test_cleanup.py` | Polars 임시 파일 정리 테스트 |
 | `tests/delete_tmp.py` | 남은 임시 폴더 수동 삭제 |
