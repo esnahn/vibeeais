@@ -2,6 +2,10 @@ import re
 import json
 from pathlib import Path
 
+# 분석 데이터 연월에 맞추어 수정
+YEAR = "2025"
+MONTH = "12"
+
 
 def build_catalog():
     base_dir = Path(__file__).resolve().parent.parent
@@ -10,9 +14,11 @@ def build_catalog():
     catalog_path = base_dir / "data" / "dataset_catalog.json"
 
     # 1. List all zip files and extract the dataset name
-    # Example format: 국토교통부_건축물대장_총괄표제부+(2025년+12월).zip
+    # Example filename: 국토교통부_건축물대장_총괄표제부+(2025년+12월).zip
     catalog = {}
-    zip_pattern = re.compile(r"국토교통부_건축물대장_(.*?)\+\(2025년\+12월\)\.zip")
+    zip_pattern = re.compile(
+        rf"국토교통부_건축물대장_(.*?)\+\({YEAR}년\+{MONTH}월\)\.zip"
+    )
 
     zip_files = list(original_dir.glob("*.zip"))
     schema_files = list(schema_dir.glob("*.txt"))
