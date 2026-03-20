@@ -1,8 +1,8 @@
 import zipfile
 import polars as pl
 import io
-import os
 import re
+from pathlib import Path
 
 
 def load_schema(schema_path):
@@ -44,9 +44,6 @@ def load_schema(schema_path):
                     cast_dtypes[col_name] = pl.Decimal(precision=precision, scale=scale)
 
     return column_names, read_dtypes, cast_dtypes
-
-
-from pathlib import Path
 
 
 def analyze_with_polars():

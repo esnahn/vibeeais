@@ -1,11 +1,9 @@
 import json
 import zipfile
 import polars as pl
-import os
 import re
 from pathlib import Path
 import tempfile
-import shutil
 import gc
 import time
 
@@ -103,7 +101,7 @@ def convert_to_parquet():
                     z.extract(target_file, path=temp_dir)
                     extracted_txt_path = Path(temp_dir) / target_file
 
-                print(f"  Converting to parquet out-of-core...")
+                print("  Converting to parquet out-of-core...")
                 _sink_csv_to_parquet(
                     extracted_txt_path,
                     out_parquet_path,
