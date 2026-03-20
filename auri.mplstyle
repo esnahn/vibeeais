@@ -1,0 +1,48 @@
+figure.figsize: 6, 4
+figure.dpi: 150
+
+savefig.dpi: 300
+savefig.bbox: tight
+savefig.pad_inches: 0.1  # default
+
+axes.linewidth: 0.2
+xtick.major.width: 0.2
+xtick.minor.width: 0.12
+ytick.major.width: 0.2
+ytick.minor.width: 0.12
+grid.linewidth: 0.2
+
+lines.linewidth: 0.5
+#lines.linestyle: -                 # solid line
+
+lines.marker: None                  # the default marker
+#lines.markerfacecolor: auto        # the default marker face color
+#lines.markeredgecolor: auto        # the default marker edge color
+lines.markeredgewidth: 0.2          # the line width around the marker symbol
+lines.markersize: 3                 # marker size, in points
+
+scatter.marker: o
+
+patch.linewidth: 0.2
+
+hatch.linewidth: 0.2
+
+boxplot.flierprops.markeredgewidth: 0.2
+boxplot.flierprops.linewidth: 0.2
+boxplot.boxprops.linewidth: 0.2
+boxplot.whiskerprops.linewidth: 0.2
+boxplot.capprops.linewidth: 0.2
+boxplot.medianprops.linewidth: 0.2
+boxplot.meanprops.linewidth: 0.2
+
+font.family: KoPubDotum Medium, sans-serif
+font.size: 8.0
+
+figure.labelsize: large  # default
+axes.titlesize: large  # default
+axes.labelsize: medium  # default
+xtick.labelsize: small
+ytick.labelsize: small
+
+# figure.autolayout: True
+# figure.constrained_layout.use: True  # causes breakage

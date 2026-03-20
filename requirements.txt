@@ -1,0 +1,31 @@
+# Package Management
+wheel
+
+# Jupyter Notebook
+ipykernel
+
+# Encoding Detection
+chardet
+
+# for displaying tables and progress bar
+wcwidth
+tabulate[widechars]
+tqdm
+
+# Dataframe Handling
+duckdb>=1.5
+# In DuckDB v1.5, setting geometry_always_xy = true enables the new behavior (x = longitude, y = latitude). Without it, affected functions emit a warning.
+# In DuckDB v2.0, the warning will become an error. Set geometry_always_xy = false to preserve the old behavior.
+# In DuckDB v2.1, geometry_always_xy = true will become the default.
+pandas>=3.0
+# pandas 3.0 introduces several major enhancements: 
+# 1. Dedicated string data type by default
+# This new data type will use the pyarrow library under the hood, if installed, to provide the performance improvements. Therefore we strongly recommend to install pyarrow alongside pandas (but pyarrow is not a required dependency installed by default).
+# 2. Consistent copy/view behaviour with Copy-on-Write (CoW): defensive .copy() calls to silence the warning are no longer needed.
+# 3. New pd.col syntax
+pyarrow  # for pandas 3.0
+polars
+
+# Visualization
+matplotlib>=3.6
+seaborn

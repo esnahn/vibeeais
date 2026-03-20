@@ -1,8 +1,10 @@
 import zipfile
 import chardet
 import os
+from pathlib import Path
 
-zip_path = r'e:/국건위-auri/2026 국건위 업무(안의순)/10. 기획단 업무/도심형 블록주택(도심주택)/0223_세움터 데이터 분석/data/original/국토교통부_건축물대장_총괄표제부+(2025년+12월).zip'
+base_dir = Path(__file__).resolve().parent.parent
+zip_path = base_dir / 'data' / 'original' / '국토교통부_건축물대장_총괄표제부+(2025년+12월).zip'
 
 try:
     with zipfile.ZipFile(zip_path, 'r') as z:
