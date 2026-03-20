@@ -2,7 +2,10 @@
 __pycache__/
 *.pyc
 .env
-data/original/
-data/parquet/
+
+data/original/*
+!/data/original/.gitkeep
+data/parquet/*
+!/data/parquet/.gitkeep
 data/tmp*/
 
