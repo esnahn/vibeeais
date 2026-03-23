@@ -7,5 +7,7 @@ data/original/*
 !/data/original/.gitkeep
 data/parquet/*
 !/data/parquet/.gitkeep
+data/region/original/*
+!/data/region/original/.gitkeep
 data/tmp*/
 
