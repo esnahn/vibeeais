@@ -12,6 +12,9 @@ wcwidth
 tabulate[widechars]
 tqdm
 
+# Data file Handling
+openpyxl
+
 # Dataframe Handling
 duckdb>=1.5
 # In DuckDB v1.5, setting geometry_always_xy = true enables the new behavior (x = longitude, y = latitude). Without it, affected functions emit a warning.
