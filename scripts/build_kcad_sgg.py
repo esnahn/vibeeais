@@ -34,7 +34,9 @@ def build_kcad_sgg():
 
         year, month, day = match.groups()
         date_str = f"{year}{int(month):02d}{int(day):02d}"
-        csv_to = data_to / f"code_kcad_sgg_{date_str}.csv"
+        
+        csv_sido = data_to / f"code_kcad_sido_{date_str}.csv"
+        csv_sgg = data_to / f"code_kcad_sgg_{date_str}.csv"
 
         # Read the Excel file
         try:
@@ -70,25 +72,33 @@ def build_kcad_sgg():
         # to transform multiline column names to single line
         df.columns = [col.replace("\n", " ") for col in df.columns]
 
-        ### Select only 시군구, not 시도 and 행정동/법정동
-        # Filter the DataFrame to get rows where 법정동코드 ends with "00000" and is not "00000000"
-        five_zero_df = df[
-            (df["법정동코드"].str[-5:] == "00000")
-            & (df["법정동코드"].str[-8:] != "00000000")
-        ]
-        # Filter the DataFrame to get rows where 행정구역분류 has a length of 5
-        final_df = five_zero_df[five_zero_df["행정구역분류"].str.len() == 5].copy()
-
-        # add a column 시군구코드 as the first 5 characters of 법정동코드
-        final_df["시군구코드"] = final_df["법정동코드"].str[:5]
+        # 1. Generate Sido CSV (KCAD length 2)
+        # Filter rows where 행정구역분류 length is 2
+        sido_df = df[df["행정구역분류"].str.len() == 2].copy()
+        # add a column 시도코드 as the first 2 characters of 법정동코드
+        sido_df["시도코드"] = sido_df["법정동코드"].str[:2]
         # make it index
-        final_df = final_df.set_index("시군구코드")
+        sido_df = sido_df.set_index("시도코드")
+        
+        print(f"Saving Sido to {csv_sido.name}")
+        sido_df.to_csv(csv_sido, index=True, encoding="utf-8-sig")
 
-        print(f"Saving to {csv_to.name}")
-        print(tabulate(final_df.head(), headers="keys"))
+        # 2. Generate SGG CSV (KCAD length 5)
+        # Filter rows where 행정구역분류 length is 5
+        sgg_df = df[df["행정구역분류"].str.len() == 5].copy()
+        # add a column 시군구코드 as the first 5 characters of 법정동코드
+        sgg_df["시군구코드"] = sgg_df["법정동코드"].str[:5]
+        # make it index
+        sgg_df = sgg_df.set_index("시군구코드")
+        
+        print(f"Saving SGG to {csv_sgg.name}")
+        sgg_df.to_csv(csv_sgg, index=True, encoding="utf-8-sig")
 
-        # save to csv, with 시군구코드 as index, encoding as utf-8-sig
-        final_df.to_csv(csv_to, index=True, encoding="utf-8-sig")
+        # Print samples
+        print("\nSido Sample:")
+        print(tabulate(sido_df.head(3), headers="keys"))
+        print("\nSGG Sample:")
+        print(tabulate(sgg_df.head(3), headers="keys"))
 
 
 if __name__ == "__main__":
