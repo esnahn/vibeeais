@@ -1,5 +1,6 @@
 import re
 from pathlib import Path
+
 import pandas as pd
 from tabulate import tabulate
 
@@ -34,7 +35,7 @@ def build_kcad_sgg():
 
         year, month, day = match.groups()
         date_str = f"{year}{int(month):02d}{int(day):02d}"
-        
+
         csv_sido = data_to / f"code_kcad_sido_{date_str}.csv"
         csv_sgg = data_to / f"code_kcad_sgg_{date_str}.csv"
 
@@ -79,7 +80,7 @@ def build_kcad_sgg():
         sido_df["시도코드"] = sido_df["법정동코드"].str[:2]
         # make it index
         sido_df = sido_df.set_index("시도코드")
-        
+
         print(f"Saving Sido to {csv_sido.name}")
         sido_df.to_csv(csv_sido, index=True, encoding="utf-8-sig")
 
@@ -90,7 +91,7 @@ def build_kcad_sgg():
         sgg_df["시군구코드"] = sgg_df["법정동코드"].str[:5]
         # make it index
         sgg_df = sgg_df.set_index("시군구코드")
-        
+
         print(f"Saving SGG to {csv_sgg.name}")
         sgg_df.to_csv(csv_sgg, index=True, encoding="utf-8-sig")
 

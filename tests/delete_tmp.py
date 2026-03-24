@@ -1,6 +1,7 @@
 import shutil
 from pathlib import Path
 
+
 def main():
     base_dir = Path("data")
     for item in base_dir.glob("tmp*"):
@@ -18,6 +19,7 @@ def main():
                 print(f"Successfully deleted {item}")
             except Exception as e:
                 print(f"Failed to delete {item}: {e}")
+
 
 if __name__ == "__main__":
     main()

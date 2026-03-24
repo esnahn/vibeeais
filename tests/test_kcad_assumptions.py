@@ -1,4 +1,5 @@
 from pathlib import Path
+
 import pandas as pd
 
 
@@ -74,7 +75,7 @@ def verify_kcad_assumptions():
     df_sgg_final = df[df["행정구역분류"].str.len() == 5]
     df_dong = df[df["행정구역분류"].str.len() > 5]
     df_missing = df[df["행정구역분류"].isna() | (df["행정구역분류"] == "")]
-    
+
     # We still care about rows that might have SGG-like BJD suffix (00000)
     cond_00000 = df["법정동코드"].str.endswith("00000")
     df_00000 = df[cond_00000]
@@ -88,7 +89,7 @@ def verify_kcad_assumptions():
         ["Missing/Unknown (KCAD NaN)", len(df_missing)],
         ["Rows with MOIS SGG-suffix (00000)", len(df_00000)],
     ]
-    
+
     log("\n### Categorization Summary (Venn Breakdown) ###")
     log(f"{'Category':<40} | {'Count':<10}")
     log("-" * 55)
@@ -97,16 +98,20 @@ def verify_kcad_assumptions():
 
     # Verification Asserts
     log("\n### Verification Checks ###")
-    
+
     # 1. KCAD Coverage (Sido + SGG + Dong + Missing = Total)
-    is_coverage_correct = (len(df_sido) + len(df_sgg_final) + len(df_dong) + len(df_missing)) == total_rows
+    is_coverage_correct = (
+        len(df_sido) + len(df_sgg_final) + len(df_dong) + len(df_missing)
+    ) == total_rows
     log(f"Check: KCAD coverage correct? {'PASS' if is_coverage_correct else 'FAIL'}")
-    
+
     # 2. SGG vs BJD-Suffix Alignment
     # Do all len-5 SGGs have a 00000 suffix in MOIS BJD?
     sgg_without_00000 = df_sgg_final[~df_sgg_final["법정동코드"].str.endswith("00000")]
-    log(f"Check: All SGGs have BJD-00000 suffix? {'PASS' if len(sgg_without_00000) == 0 else 'FAIL'} (Mismatches: {len(sgg_without_00000)})")
-    
+    log(
+        f"Check: All SGGs have BJD-00000 suffix? {'PASS' if len(sgg_without_00000) == 0 else 'FAIL'} (Mismatches: {len(sgg_without_00000)})"
+    )
+
     # 3. Known SGG check
     known_sggs = ["강남구", "수원시", "세종특별자치시"]
     found_sgg_names = df_sgg_final[
@@ -140,34 +145,38 @@ def verify_kcad_assumptions():
     # 5. SGG Sub-categorization (226 + 41 + 1 = 268)
     log("\n### SGG Sub-categorization Details ###")
     log("Logic: Filter by '행정구역분류' length 5.")
-    log("Categories: Special (Sejong), Non-autonomous (Space or Jeju), Autonomous (Legal SGG).")
-    
+    log(
+        "Categories: Special (Sejong), Non-autonomous (Space or Jeju), Autonomous (Legal SGG)."
+    )
+
     # Category Identification
     def classify(row):
         name = row["시군구"]
         sido = row["시도"]
-        
+
         # 1. Sejong Special Case
         if sido == "세종특별자치시" and name == "세종특별자치시":
             return "Special"
-            
+
         # 2. Non-autonomous: Space in name OR Jeju admin cities
         if " " in name or sido == "제주특별자치도":
             return "Non-autonomous"
-            
+
         # 3. Autonomous: The rest (Legal Sigungu)
         return "Autonomous"
 
     df_sgg_final["Category"] = df_sgg_final.apply(classify, axis=1)
-    
+
     df_sejong = df_sgg_final[df_sgg_final["Category"] == "Special"]
     df_non_auto = df_sgg_final[df_sgg_final["Category"] == "Non-autonomous"]
     df_auto = df_sgg_final[df_sgg_final["Category"] == "Autonomous"]
-    
+
     log(f"{'Category':<45} | {'Count':<10} | {'Expected':<10}")
     log("-" * 75)
     log(f"{'Autonomous SGG (Basic Si-Gun-Gu)':<45} | {len(df_auto):<10} | {'226':<10}")
-    log(f"{'Non-autonomous Districts (Gu with space/Jeju)':<45} | {len(df_non_auto):<10} | {'41':<10}")
+    log(
+        f"{'Non-autonomous Districts (Gu with space/Jeju)':<45} | {len(df_non_auto):<10} | {'41':<10}"
+    )
     log(f"{'Special City (Sejong)':<45} | {len(df_sejong):<10} | {'1':<10}")
     log("-" * 75)
     log(f"{'Total SGG Count (Len 5)':<45} | {len(df_sgg_final):<10} | {'268':<10}")

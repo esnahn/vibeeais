@@ -1,6 +1,7 @@
 import zipfile
-import chardet
 from pathlib import Path
+
+import chardet
 
 base_dir = Path(__file__).resolve().parent.parent
 zip_path = (

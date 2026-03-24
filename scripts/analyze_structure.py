@@ -1,8 +1,9 @@
-import zipfile
-import polars as pl
 import io
 import re
+import zipfile
 from pathlib import Path
+
+import polars as pl
 
 
 def load_schema(schema_path):

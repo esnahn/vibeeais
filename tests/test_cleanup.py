@@ -1,9 +1,10 @@
-import zipfile
-import tempfile
-import shutil
-from pathlib import Path
-import polars as pl
 import gc
+import shutil
+import tempfile
+import zipfile
+from pathlib import Path
+
+import polars as pl
 
 
 def load_schema(schema_path):

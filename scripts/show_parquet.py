@@ -1,7 +1,8 @@
 # TODO: polars???
 
-import polars as pl
 from pathlib import Path
+
+import polars as pl
 
 
 def show_parquet(file_path: Path):
@@ -32,7 +33,7 @@ def show_parquet(file_path: Path):
         print(f"  - {col_name}: {dtype}")
 
     # Show sample data
-    print(f"\n[Preview (first row)]")
+    print("\n[Preview (first row)]")
 
     df = lf.head(1).collect()
 

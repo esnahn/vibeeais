@@ -1,11 +1,12 @@
-import json
-import zipfile
-import polars as pl
-import re
-from pathlib import Path
-import tempfile
 import gc
+import json
+import re
+import tempfile
 import time
+import zipfile
+from pathlib import Path
+
+import polars as pl
 
 
 def load_schema(schema_path):
