@@ -1,0 +1,53 @@
+=== KOSTAT SGG Extraction Verification Results ===
+Step 1: Contextualizing SGG Count (Total 268)
+- 226 basic/legal Si-Gun-Gu (시군구)
+- 41 non-autonomous districts (자치구가 아닌 구, e.g. 수원시 장안구)
+- 1 special self-governing city without separate SGGs (세종특별자치시)
+-------------------------------------------------------
+Analyzing latest file: 한국행정구역분류_2026. 2. 1.기준_20260320090814.xlsx
+
+### Categorization Summary (Venn Breakdown) ###
+Category                                 | Count     
+-------------------------------------------------------
+Total Rows in Excel                      | 21790     
+Sido Level (KCAD len 2)                  | 17        
+SGG Level (KCAD len 5)                   | 268       
+Dong/Sub-SGG Level (KCAD len > 5)        | 21414     
+Missing/Unknown (KCAD NaN)               | 91        
+Rows with MOIS SGG-suffix (00000)        | 346       
+
+### Verification Checks ###
+Check: KCAD coverage correct? PASS
+Check: All SGGs have BJD-00000 suffix? PASS (Mismatches: 0)
+Check: Known SGGs captured? PASS (Found: 강남구, 세종특별자치시, 수원시, 수원시 장안구, 수원시 권선구, 수원시 팔달구, 수원시 영통구)
+
+### Code Distinction Summary (MOIS BJD vs. KOSTAT KCAD) ###
+BJD codes (MOIS) and KCAD codes (KOSTAT) are different as expected.
+Showing sample of differences:
+   시도 시군구 KCAD(KOSTAT) BJD_SGG(MOIS)
+서울특별시 종로구        11010         11110
+서울특별시  중구        11020         11140
+서울특별시 용산구        11030         11170
+서울특별시 성동구        11040         11200
+서울특별시 광진구        11050         11215
+
+### SGG Sub-categorization Details ###
+Logic: Filter by '행정구역분류' length 5.
+Categories: Special (Sejong), Non-autonomous (Space or Jeju), Autonomous (Legal SGG).
+Category                                      | Count      | Expected  
+---------------------------------------------------------------------------
+Autonomous SGG (Basic Si-Gun-Gu)              | 226        | 226       
+Non-autonomous Districts (Gu with space/Jeju) | 41         | 41        
+Special City (Sejong)                         | 1          | 1         
+---------------------------------------------------------------------------
+Total SGG Count (Len 5)                       | 268        | 268       
+
+Sample of Non-autonomous districts:
+ 시도     시군구 행정구역분류      법정동코드
+경기도 수원시 장안구  31011 4111100000
+경기도 수원시 권선구  31012 4111300000
+경기도 수원시 팔달구  31013 4111500000
+경기도 수원시 영통구  31014 4111700000
+경기도 성남시 수정구  31021 4113100000
+
+Full results saved to: E:\vibeeais\results\kcad_verify_results.txt
