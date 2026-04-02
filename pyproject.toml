@@ -1,2 +1,5 @@
 [tool.jupytext]
 formats = "ipynb,py:percent"
+
+[tool.ruff.lint.per-file-ignores]
+"notebooks/**/*" = ["F821"]

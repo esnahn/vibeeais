@@ -2,6 +2,7 @@
 wheel
 pre-commit
 isort
+ruff
 
 # Jupyter Notebook
 ipykernel

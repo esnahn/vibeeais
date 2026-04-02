@@ -26,6 +26,18 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
+## Jupytext 사용 가이드 (Notebook 동기화)
+
+이 프로젝트는 Jupytext를 사용하여 Jupyter Notebook 파일(`.ipynb`)과 파이썬 스크립트(`.py`)를 연동하여 사용합니다. (`pyproject.toml`에 `formats = "ipynb,py:percent"`로 설정되어 있습니다.)
+
+```powershell
+# notebooks 폴더 내의 노트북과 파이썬 스크립트를 동기화하고 포맷팅(isort, ruff)을 적용합니다.
+.\scripts\sync_notebooks.ps1
+```
+
+- **버전 관리 권장사항**: Git에는 충돌 해결이 어려운 `.ipynb` 파일 대신 변환된 `.py` 스크립트를 커밋하고 이를 기준으로 작업하는 것을 권장합니다.
+- **팁**: VSCode 등의 에디터에서 Jupytext 익스텐션을 설치하여 사용하면 파일 열기 및 저장 시 자동 동기화가 가능합니다. (다만, 동기화 후 린트 및 포맷팅이 적용되므로, 커밋 전에는 수동으로 동기화하는 것을 권장합니다.)
+
 ## 신규 데이터 갱신 절차
 
 ### 1. 원본 데이터 교체
