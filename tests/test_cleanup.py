@@ -31,7 +31,7 @@ def test_full_polars_cleanup():
     zip_path = (
         base_dir / "data/original/국토교통부_건축물대장_총괄표제부+(2025년+12월).zip"
     )
-    schema_path = base_dir / "data/schema/schema_총괄표제부.txt"
+    schema_path = base_dir / "data/schema/schema_건축물대장_총괄표제부.txt"
     parquet_path = base_dir / "data/parquet/총괄표제부_test.parquet"
 
     columns, read_dtypes = load_schema(schema_path)

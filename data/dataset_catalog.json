@@ -1,62 +1,72 @@
 {
-    "공동주택가격": {
+    "건축물대장_공동주택가격": {
+        "data_category": "건축물대장",
         "dataset_name": "공동주택가격",
         "zip_path": "data/original/국토교통부_건축물대장_공동주택가격+(2025년+12월).zip",
-        "schema_path": "data/schema/schema_공동주택가격.txt",
+        "schema_path": "data/schema/schema_건축물대장_공동주택가격.txt",
         "zip_size_bytes": 4204179688
     },
-    "기본개요": {
+    "건축물대장_기본개요": {
+        "data_category": "건축물대장",
         "dataset_name": "기본개요",
         "zip_path": "data/original/국토교통부_건축물대장_기본개요+(2025년+12월).zip",
-        "schema_path": "data/schema/schema_기본개요.txt",
+        "schema_path": "data/schema/schema_건축물대장_기본개요.txt",
         "zip_size_bytes": 711108392
     },
-    "부속지번": {
+    "건축물대장_부속지번": {
+        "data_category": "건축물대장",
         "dataset_name": "부속지번",
         "zip_path": "data/original/국토교통부_건축물대장_부속지번+(2025년+12월).zip",
-        "schema_path": "data/schema/schema_부속지번.txt",
+        "schema_path": "data/schema/schema_건축물대장_부속지번.txt",
         "zip_size_bytes": 109851751
     },
-    "오수정화시설": {
+    "건축물대장_오수정화시설": {
+        "data_category": "건축물대장",
         "dataset_name": "오수정화시설",
         "zip_path": "data/original/국토교통부_건축물대장_오수정화시설+(2025년+12월).zip",
-        "schema_path": "data/schema/schema_오수정화시설.txt",
+        "schema_path": "data/schema/schema_건축물대장_오수정화시설.txt",
         "zip_size_bytes": 229259697
     },
-    "전유공용면적": {
+    "건축물대장_전유공용면적": {
+        "data_category": "건축물대장",
         "dataset_name": "전유공용면적",
         "zip_path": "data/original/국토교통부_건축물대장_전유공용면적+(2025년+12월).zip",
-        "schema_path": "data/schema/schema_전유공용면적.txt",
+        "schema_path": "data/schema/schema_건축물대장_전유공용면적.txt",
         "zip_size_bytes": 3265653301
     },
-    "전유부": {
+    "건축물대장_전유부": {
+        "data_category": "건축물대장",
         "dataset_name": "전유부",
         "zip_path": "data/original/국토교통부_건축물대장_전유부+(2025년+12월).zip",
-        "schema_path": "data/schema/schema_전유부.txt",
+        "schema_path": "data/schema/schema_건축물대장_전유부.txt",
         "zip_size_bytes": 957649253
     },
-    "지역지구구역": {
+    "건축물대장_지역지구구역": {
+        "data_category": "건축물대장",
         "dataset_name": "지역지구구역",
         "zip_path": "data/original/국토교통부_건축물대장_지역지구구역+(2025년+12월).zip",
-        "schema_path": "data/schema/schema_지역지구구역.txt",
+        "schema_path": "data/schema/schema_건축물대장_지역지구구역.txt",
         "zip_size_bytes": 192466966
     },
-    "총괄표제부": {
+    "건축물대장_총괄표제부": {
+        "data_category": "건축물대장",
         "dataset_name": "총괄표제부",
         "zip_path": "data/original/국토교통부_건축물대장_총괄표제부+(2025년+12월).zip",
-        "schema_path": "data/schema/schema_총괄표제부.txt",
+        "schema_path": "data/schema/schema_건축물대장_총괄표제부.txt",
         "zip_size_bytes": 39017397
     },
-    "층별개요": {
+    "건축물대장_층별개요": {
+        "data_category": "건축물대장",
         "dataset_name": "층별개요",
         "zip_path": "data/original/국토교통부_건축물대장_층별개요+(2025년+12월).zip",
-        "schema_path": "data/schema/schema_층별개요.txt",
+        "schema_path": "data/schema/schema_건축물대장_층별개요.txt",
         "zip_size_bytes": 708437547
     },
-    "표제부": {
+    "건축물대장_표제부": {
+        "data_category": "건축물대장",
         "dataset_name": "표제부",
         "zip_path": "data/original/국토교통부_건축물대장_표제부+(2025년+12월).zip",
-        "schema_path": "data/schema/schema_표제부.txt",
+        "schema_path": "data/schema/schema_건축물대장_표제부.txt",
         "zip_size_bytes": 677738099
     }
 }

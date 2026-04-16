@@ -1,10 +1,15 @@
 import gc
 import json
 import re
+import sys
 import tempfile
 import time
 import zipfile
 from pathlib import Path
+
+# 출력 인코딩을 UTF-8로 강제하여 윈도우 터미널 한글 깨짐 방지
+if sys.stdout.encoding != "utf-8":
+    sys.stdout.reconfigure(encoding="utf-8")
 
 import polars as pl
 
@@ -80,16 +85,16 @@ def convert_to_parquet():
 
     print(f"Loaded catalog with {len(catalog)} datasets.")
 
-    for dataset_name, info in catalog.items():
+    for catalog_key, info in catalog.items():
         zip_path = base_dir / info["zip_path"]
         schema_path = base_dir / info["schema_path"]
-        out_parquet_path = parquet_dir / f"{dataset_name}.parquet"
+        out_parquet_path = parquet_dir / f"{catalog_key}.parquet"
 
         if out_parquet_path.exists():
-            print(f"Skipping {dataset_name}, parquet already exists.")
+            print(f"Skipping {catalog_key}, parquet already exists.")
             continue
 
-        print(f"\nProcessing {dataset_name}...")
+        print(f"\nProcessing {catalog_key}...")
         columns, read_dtypes, cast_dtypes = load_schema(schema_path)
 
         # Polars Lazy API out-of-core processing works best on uncompressed files
@@ -113,7 +118,7 @@ def convert_to_parquet():
                 print(f"  Successfully saved -> {out_parquet_path.name}")
 
             except Exception as e:
-                print(f"  Failed processing {dataset_name}: {e}")
+                print(f"  Failed processing {catalog_key}: {e}")
 
 
 if __name__ == "__main__":

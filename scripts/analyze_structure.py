@@ -1,7 +1,12 @@
 import io
 import re
+import sys
 import zipfile
 from pathlib import Path
+
+# 출력 인코딩을 UTF-8로 강제하여 윈도우 터미널 한글 깨짐 방지
+if sys.stdout.encoding != "utf-8":
+    sys.stdout.reconfigure(encoding="utf-8")
 
 import polars as pl
 
@@ -49,7 +54,7 @@ def load_schema(schema_path):
 
 def analyze_with_polars():
     base_dir = Path(__file__).resolve().parent.parent
-    schema_file = base_dir / "data/schema/schema_총괄표제부.txt"
+    schema_file = base_dir / "data/schema/schema_건축물대장_총괄표제부.txt"
     zip_path = (
         base_dir / "data/original/국토교통부_건축물대장_총괄표제부+(2025년+12월).zip"
     )
