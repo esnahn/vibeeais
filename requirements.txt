@@ -36,3 +36,8 @@ polars
 # Visualization
 matplotlib>=3.6
 seaborn
+
+# Scraping
+playwright
+beautifulsoup4
+requests
