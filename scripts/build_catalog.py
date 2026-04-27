@@ -66,7 +66,8 @@ def build_catalog():
     # 3. Save matching results to JSON
     with open(catalog_path, "w", encoding="utf-8") as f:
         json.dump(catalog, f, ensure_ascii=False, indent=4)
-        print(f"Saved catalog to {catalog_path.relative_to(base_dir)}")
+        f.write("\n")
+    print(f"Saved catalog to {catalog_path.relative_to(base_dir)}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,303 @@
+[
+  {
+    "cat_val": "01",
+    "cat_name": "건축인허가",
+    "task_code": "0117",
+    "opn_code": "OPN202601201217465990",
+    "service_name": "주택유형 (2025년 12월)"
+  },
+  {
+    "cat_val": "01",
+    "cat_name": "건축인허가",
+    "task_code": "0116",
+    "opn_code": "OPN202601201217458850",
+    "service_name": "대지위치 (2025년 12월)"
+  },
+  {
+    "cat_val": "01",
+    "cat_name": "건축인허가",
+    "task_code": "0115",
+    "opn_code": "OPN202601201217023870",
+    "service_name": "도로대장 (2025년 12월)"
+  },
+  {
+    "cat_val": "01",
+    "cat_name": "건축인허가",
+    "task_code": "0114",
+    "opn_code": "OPN202601201217009280",
+    "service_name": "지역지구구역 (2025년 12월)"
+  },
+  {
+    "cat_val": "01",
+    "cat_name": "건축인허가",
+    "task_code": "0113",
+    "opn_code": "OPN202601201216158190",
+    "service_name": "호별전유공용면적 (2025년 12월)"
+  },
+  {
+    "cat_val": "01",
+    "cat_name": "건축인허가",
+    "task_code": "0112",
+    "opn_code": "OPN202601201215038080",
+    "service_name": "전유공용면적 (2025년 12월)"
+  },
+  {
+    "cat_val": "01",
+    "cat_name": "건축인허가",
+    "task_code": "0111",
+    "opn_code": "OPN202601201214368630",
+    "service_name": "부설주차장 (2025년 12월)"
+  },
+  {
+    "cat_val": "01",
+    "cat_name": "건축인허가",
+    "task_code": "0110",
+    "opn_code": "OPN202601201214366370",
+    "service_name": "주차장 (2025년 12월)"
+  },
+  {
+    "cat_val": "01",
+    "cat_name": "건축인허가",
+    "task_code": "0109",
+    "opn_code": "OPN202601201214257200",
+    "service_name": "오수정화시설 (2025년 12월)"
+  },
+  {
+    "cat_val": "01",
+    "cat_name": "건축인허가",
+    "task_code": "0108",
+    "opn_code": "OPN202601201214121130",
+    "service_name": "가설건축물 (2025년 12월)"
+  },
+  {
+    "cat_val": "01",
+    "cat_name": "건축인허가",
+    "task_code": "0107",
+    "opn_code": "OPN202601201214015910",
+    "service_name": "철거멸실관리대장 (2025년 12월)"
+  },
+  {
+    "cat_val": "01",
+    "cat_name": "건축인허가",
+    "task_code": "0106",
+    "opn_code": "OPN202601201213586590",
+    "service_name": "공작물관리대장 (2025년 12월)"
+  },
+  {
+    "cat_val": "01",
+    "cat_name": "건축인허가",
+    "task_code": "0105",
+    "opn_code": "OPN202601201213559050",
+    "service_name": "대수선 (2025년 12월)"
+  },
+  {
+    "cat_val": "01",
+    "cat_name": "건축인허가",
+    "task_code": "0104",
+    "opn_code": "OPN202601201213553630",
+    "service_name": "호별개요 (2025년 12월)"
+  },
+  {
+    "cat_val": "01",
+    "cat_name": "건축인허가",
+    "task_code": "0103",
+    "opn_code": "OPN202601201213423890",
+    "service_name": "층별개요 (2025년 12월)"
+  },
+  {
+    "cat_val": "01",
+    "cat_name": "건축인허가",
+    "task_code": "0102",
+    "opn_code": "OPN202601201212189320",
+    "service_name": "동별개요 (2025년 12월)"
+  },
+  {
+    "cat_val": "01",
+    "cat_name": "건축인허가",
+    "task_code": "0101",
+    "opn_code": "OPN202601201211215850",
+    "service_name": "기본개요 (2025년 12월)"
+  },
+  {
+    "cat_val": "02",
+    "cat_name": "주택인허가",
+    "task_code": "0216",
+    "opn_code": "OPN202601201218314080",
+    "service_name": "복리분양시설 (2025년 12월)"
+  },
+  {
+    "cat_val": "02",
+    "cat_name": "주택인허가",
+    "task_code": "0215",
+    "opn_code": "OPN202601201218306400",
+    "service_name": "대지위치 (2025년 12월)"
+  },
+  {
+    "cat_val": "02",
+    "cat_name": "주택인허가",
+    "task_code": "0214",
+    "opn_code": "OPN202601201218287060",
+    "service_name": "지역지구구역 (2025년 12월)"
+  },
+  {
+    "cat_val": "02",
+    "cat_name": "주택인허가",
+    "task_code": "0213",
+    "opn_code": "OPN202601201218284670",
+    "service_name": "관리공동부대복리시설 (2025년 12월)"
+  },
+  {
+    "cat_val": "02",
+    "cat_name": "주택인허가",
+    "task_code": "0212",
+    "opn_code": "OPN202601201218284090",
+    "service_name": "관리공동형별개요 (2025년 12월)"
+  },
+  {
+    "cat_val": "02",
+    "cat_name": "주택인허가",
+    "task_code": "0211",
+    "opn_code": "OPN202601201218271320",
+    "service_name": "행위개요 (2025년 12월)"
+  },
+  {
+    "cat_val": "02",
+    "cat_name": "주택인허가",
+    "task_code": "0210",
+    "opn_code": "OPN202601201218242410",
+    "service_name": "행위호전유공용면적 (2025년 12월)"
+  },
+  {
+    "cat_val": "02",
+    "cat_name": "주택인허가",
+    "task_code": "0209",
+    "opn_code": "OPN202601201218230070",
+    "service_name": "전유공용면적 (2025년 12월)"
+  },
+  {
+    "cat_val": "02",
+    "cat_name": "주택인허가",
+    "task_code": "0208",
+    "opn_code": "OPN202601201218192990",
+    "service_name": "부설주차장 (2025년 12월)"
+  },
+  {
+    "cat_val": "02",
+    "cat_name": "주택인허가",
+    "task_code": "0207",
+    "opn_code": "OPN202601201218192380",
+    "service_name": "주차장 (2025년 12월)"
+  },
+  {
+    "cat_val": "02",
+    "cat_name": "주택인허가",
+    "task_code": "0206",
+    "opn_code": "OPN202601201218189220",
+    "service_name": "오수정화시설 (2025년 12월)"
+  },
+  {
+    "cat_val": "02",
+    "cat_name": "주택인허가",
+    "task_code": "0205",
+    "opn_code": "OPN202601201218187530",
+    "service_name": "부대시설 (2025년 12월)"
+  },
+  {
+    "cat_val": "02",
+    "cat_name": "주택인허가",
+    "task_code": "0204",
+    "opn_code": "OPN202601201218173250",
+    "service_name": "호별개요 (2025년 12월)"
+  },
+  {
+    "cat_val": "02",
+    "cat_name": "주택인허가",
+    "task_code": "0203",
+    "opn_code": "OPN202601201218005050",
+    "service_name": "층별개요 (2025년 12월)"
+  },
+  {
+    "cat_val": "02",
+    "cat_name": "주택인허가",
+    "task_code": "0202",
+    "opn_code": "OPN202601201217512200",
+    "service_name": "동별개요 (2025년 12월)"
+  },
+  {
+    "cat_val": "02",
+    "cat_name": "주택인허가",
+    "task_code": "0201",
+    "opn_code": "OPN202601201217486630",
+    "service_name": "기본개요 (2025년 12월)"
+  },
+  {
+    "cat_val": "03",
+    "cat_name": "건축물대장",
+    "task_code": "0310",
+    "opn_code": "OPN202601201258138430",
+    "service_name": "지역지구구역 (2025년 12월)"
+  },
+  {
+    "cat_val": "03",
+    "cat_name": "건축물대장",
+    "task_code": "0309",
+    "opn_code": "OPN202601201257345590",
+    "service_name": "전유부 (2025년 12월)"
+  },
+  {
+    "cat_val": "03",
+    "cat_name": "건축물대장",
+    "task_code": "0308",
+    "opn_code": "OPN202601201254315630",
+    "service_name": "공동주택가격 (2025년 12월)"
+  },
+  {
+    "cat_val": "03",
+    "cat_name": "건축물대장",
+    "task_code": "0307",
+    "opn_code": "OPN202601201238268690",
+    "service_name": "오수정화시설 (2025년 12월)"
+  },
+  {
+    "cat_val": "03",
+    "cat_name": "건축물대장",
+    "task_code": "0306",
+    "opn_code": "OPN202601201237441010",
+    "service_name": "전유공용면적 (2025년 12월)"
+  },
+  {
+    "cat_val": "03",
+    "cat_name": "건축물대장",
+    "task_code": "0305",
+    "opn_code": "OPN202601201225472240",
+    "service_name": "부속지번 (2025년 12월)"
+  },
+  {
+    "cat_val": "03",
+    "cat_name": "건축물대장",
+    "task_code": "0304",
+    "opn_code": "OPN202601201225218680",
+    "service_name": "층별개요 (2025년 12월)"
+  },
+  {
+    "cat_val": "03",
+    "cat_name": "건축물대장",
+    "task_code": "0303",
+    "opn_code": "OPN202601201223032890",
+    "service_name": "표제부 (2025년 12월)"
+  },
+  {
+    "cat_val": "03",
+    "cat_name": "건축물대장",
+    "task_code": "0302",
+    "opn_code": "OPN202601201221011020",
+    "service_name": "총괄표제부 (2025년 12월)"
+  },
+  {
+    "cat_val": "03",
+    "cat_name": "건축물대장",
+    "task_code": "0301",
+    "opn_code": "OPN202601201220539950",
+    "service_name": "기본개요 (2025년 12월)"
+  }
+]

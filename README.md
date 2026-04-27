@@ -40,13 +40,26 @@ pip install -r requirements.txt
 
 ## 신규 데이터 갱신 절차
 
-### 1. 원본 데이터 교체
+### 1. 원본 데이터 및 스키마 수집 (자동화 스크립트)
 
-`data/original/` 안의 `.zip` 파일을 새 버전으로 교체합니다.
+데이터 포털(hub.go.kr)에서 스키마와 원본 `.zip` 파일을 자동으로 다운로드합니다. 각 스크립트 파일 상단의 `YEAR`와 `MONTH` 변수를 타겟 연월(예: "2025", "12")로 수정한 후 아래 순서대로 실행하세요.
 
-> 파일명 형식: `국토교통부_건축물대장_{데이터셋명}+(YYYY년+MM월).zip`
+1. **스키마 수집**: 대상 연월의 스키마(컬럼 정보) 텍스트 파일을 `data/schema/`에 저장합니다.
+   ```powershell
+   python scripts/scrape_schemas.py
+   ```
+2. **다운로드 목록 생성**: 다운로드 대상 항목을 파악하여 `data/originals_list_YYYYMM.json`에 목록을 저장합니다. 필요 시 JSON 파일을 열어 다운로드하지 않을 항목을 편집할 수 있습니다.
+   ```powershell
+   python scripts/originals_list_collect.py
+   ```
+3. **원본 파일 다운로드**: 생성된 목록을 바탕으로 `data/original/` 폴더에 `.zip` 파일들을 일괄 다운로드합니다.
+   ```powershell
+   python scripts/originals_download.py
+   ```
 
-### 2. 카탈로그 재생성
+> **참고 (수동 다운로드 시)**: 파일명 형식은 `국토교통부_{카테고리}_{데이터셋명}+(YYYY년+MM월).zip` 이어야 합니다.
+
+### 2. 카탈로그 (재)생성
 
 `build_catalog.py`을 실행하여 zip 파일과 schema를 매핑하는 `dataset_catalog.json`을 갱신합니다.
 
@@ -79,7 +92,10 @@ python scripts/convert_to_parquet.py
 
 | 파일 | 역할 |
 |---|---|
-| `scripts/build_catalog.py` | zip ↔ schema 매핑 카탈로그 생성 (`convert_to_parquet.py` 실행 전 실행 필수)|
+| `scripts/scrape_schemas.py` | 대상 연월의 스키마 수집 |
+| `scripts/originals_list_collect.py` | 다운로드 목록 수집 |
+| `scripts/originals_download.py` | 원본 zip 파일 다운로드 |
+| `scripts/build_catalog.py` | zip ↔ schema 매핑 카탈로그 생성 |
 | `scripts/convert_to_parquet.py` | zip → parquet 일괄 변환 |
 | `scripts/show_parquet.py` | 변환된 전체 parquet 파일들의 스키마 및 샘플 데이터 연속 조회 |
 | `scripts/analyze_structure.py` | parquet 스키마/샘플 확인 |

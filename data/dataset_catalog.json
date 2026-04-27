@@ -68,5 +68,236 @@
         "zip_path": "data/original/국토교통부_건축물대장_표제부+(2025년+12월).zip",
         "schema_path": "data/schema/schema_건축물대장_표제부.txt",
         "zip_size_bytes": 677738099
+    },
+    "건축인허가_가설건축물": {
+        "data_category": "건축인허가",
+        "dataset_name": "가설건축물",
+        "zip_path": "data/original/국토교통부_건축인허가_가설건축물+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_건축인허가_가설건축물.txt",
+        "zip_size_bytes": 51551221
+    },
+    "건축인허가_공작물관리대장": {
+        "data_category": "건축인허가",
+        "dataset_name": "공작물관리대장",
+        "zip_path": "data/original/국토교통부_건축인허가_공작물관리대장+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_건축인허가_공작물관리대장.txt",
+        "zip_size_bytes": 14049829
+    },
+    "건축인허가_기본개요": {
+        "data_category": "건축인허가",
+        "dataset_name": "기본개요",
+        "zip_path": "data/original/국토교통부_건축인허가_기본개요+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_건축인허가_기본개요.txt",
+        "zip_size_bytes": 430655820
+    },
+    "건축인허가_대수선": {
+        "data_category": "건축인허가",
+        "dataset_name": "대수선",
+        "zip_path": "data/original/국토교통부_건축인허가_대수선+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_건축인허가_대수선.txt",
+        "zip_size_bytes": 2749458
+    },
+    "건축인허가_대지위치": {
+        "data_category": "건축인허가",
+        "dataset_name": "대지위치",
+        "zip_path": "data/original/국토교통부_건축인허가_대지위치+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_건축인허가_대지위치.txt",
+        "zip_size_bytes": 224211836
+    },
+    "건축인허가_도로대장": {
+        "data_category": "건축인허가",
+        "dataset_name": "도로대장",
+        "zip_path": "data/original/국토교통부_건축인허가_도로대장+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_건축인허가_도로대장.txt",
+        "zip_size_bytes": 7227028
+    },
+    "건축인허가_동별개요": {
+        "data_category": "건축인허가",
+        "dataset_name": "동별개요",
+        "zip_path": "data/original/국토교통부_건축인허가_동별개요+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_건축인허가_동별개요.txt",
+        "zip_size_bytes": 309311778
+    },
+    "건축인허가_부설주차장": {
+        "data_category": "건축인허가",
+        "dataset_name": "부설주차장",
+        "zip_path": "data/original/국토교통부_건축인허가_부설주차장+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_건축인허가_부설주차장.txt",
+        "zip_size_bytes": 1053746
+    },
+    "건축인허가_오수정화시설": {
+        "data_category": "건축인허가",
+        "dataset_name": "오수정화시설",
+        "zip_path": "data/original/국토교통부_건축인허가_오수정화시설+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_건축인허가_오수정화시설.txt",
+        "zip_size_bytes": 72751403
+    },
+    "건축인허가_전유공용면적": {
+        "data_category": "건축인허가",
+        "dataset_name": "전유공용면적",
+        "zip_path": "data/original/국토교통부_건축인허가_전유공용면적+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_건축인허가_전유공용면적.txt",
+        "zip_size_bytes": 117630469
+    },
+    "건축인허가_주차장": {
+        "data_category": "건축인허가",
+        "dataset_name": "주차장",
+        "zip_path": "data/original/국토교통부_건축인허가_주차장+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_건축인허가_주차장.txt",
+        "zip_size_bytes": 57941022
+    },
+    "건축인허가_주택유형": {
+        "data_category": "건축인허가",
+        "dataset_name": "주택유형",
+        "zip_path": "data/original/국토교통부_건축인허가_주택유형+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_건축인허가_주택유형.txt",
+        "zip_size_bytes": 3178380
+    },
+    "건축인허가_지역지구구역": {
+        "data_category": "건축인허가",
+        "dataset_name": "지역지구구역",
+        "zip_path": "data/original/국토교통부_건축인허가_지역지구구역+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_건축인허가_지역지구구역.txt",
+        "zip_size_bytes": 215088699
+    },
+    "건축인허가_철거멸실관리대장": {
+        "data_category": "건축인허가",
+        "dataset_name": "철거멸실관리대장",
+        "zip_path": "data/original/국토교통부_건축인허가_철거멸실관리대장+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_건축인허가_철거멸실관리대장.txt",
+        "zip_size_bytes": 15082185
+    },
+    "건축인허가_층별개요": {
+        "data_category": "건축인허가",
+        "dataset_name": "층별개요",
+        "zip_path": "data/original/국토교통부_건축인허가_층별개요+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_건축인허가_층별개요.txt",
+        "zip_size_bytes": 418775401
+    },
+    "건축인허가_호별개요": {
+        "data_category": "건축인허가",
+        "dataset_name": "호별개요",
+        "zip_path": "data/original/국토교통부_건축인허가_호별개요+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_건축인허가_호별개요.txt",
+        "zip_size_bytes": 55139851
+    },
+    "건축인허가_호별전유공용면적": {
+        "data_category": "건축인허가",
+        "dataset_name": "호별전유공용면적",
+        "zip_path": "data/original/국토교통부_건축인허가_호별전유공용면적+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_건축인허가_호별전유공용면적.txt",
+        "zip_size_bytes": 297473575
+    },
+    "주택인허가_관리공동부대복리시설": {
+        "data_category": "주택인허가",
+        "dataset_name": "관리공동부대복리시설",
+        "zip_path": "data/original/국토교통부_주택인허가_관리공동부대복리시설+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_주택인허가_관리공동부대복리시설.txt",
+        "zip_size_bytes": 224349
+    },
+    "주택인허가_관리공동형별개요": {
+        "data_category": "주택인허가",
+        "dataset_name": "관리공동형별개요",
+        "zip_path": "data/original/국토교통부_주택인허가_관리공동형별개요+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_주택인허가_관리공동형별개요.txt",
+        "zip_size_bytes": 4122136
+    },
+    "주택인허가_기본개요": {
+        "data_category": "주택인허가",
+        "dataset_name": "기본개요",
+        "zip_path": "data/original/국토교통부_주택인허가_기본개요+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_주택인허가_기본개요.txt",
+        "zip_size_bytes": 7516715
+    },
+    "주택인허가_대지위치": {
+        "data_category": "주택인허가",
+        "dataset_name": "대지위치",
+        "zip_path": "data/original/국토교통부_주택인허가_대지위치+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_주택인허가_대지위치.txt",
+        "zip_size_bytes": 9284695
+    },
+    "주택인허가_동별개요": {
+        "data_category": "주택인허가",
+        "dataset_name": "동별개요",
+        "zip_path": "data/original/국토교통부_주택인허가_동별개요+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_주택인허가_동별개요.txt",
+        "zip_size_bytes": 12857532
+    },
+    "주택인허가_복리분양시설": {
+        "data_category": "주택인허가",
+        "dataset_name": "복리분양시설",
+        "zip_path": "data/original/국토교통부_주택인허가_복리분양시설+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_주택인허가_복리분양시설.txt",
+        "zip_size_bytes": 3106548
+    },
+    "주택인허가_부대시설": {
+        "data_category": "주택인허가",
+        "dataset_name": "부대시설",
+        "zip_path": "data/original/국토교통부_주택인허가_부대시설+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_주택인허가_부대시설.txt",
+        "zip_size_bytes": 7632785
+    },
+    "주택인허가_부설주차장": {
+        "data_category": "주택인허가",
+        "dataset_name": "부설주차장",
+        "zip_path": "data/original/국토교통부_주택인허가_부설주차장+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_주택인허가_부설주차장.txt",
+        "zip_size_bytes": 72763
+    },
+    "주택인허가_오수정화시설": {
+        "data_category": "주택인허가",
+        "dataset_name": "오수정화시설",
+        "zip_path": "data/original/국토교통부_주택인허가_오수정화시설+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_주택인허가_오수정화시설.txt",
+        "zip_size_bytes": 647537
+    },
+    "주택인허가_전유공용면적": {
+        "data_category": "주택인허가",
+        "dataset_name": "전유공용면적",
+        "zip_path": "data/original/국토교통부_주택인허가_전유공용면적+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_주택인허가_전유공용면적.txt",
+        "zip_size_bytes": 16006406
+    },
+    "주택인허가_주차장": {
+        "data_category": "주택인허가",
+        "dataset_name": "주차장",
+        "zip_path": "data/original/국토교통부_주택인허가_주차장+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_주택인허가_주차장.txt",
+        "zip_size_bytes": 1143545
+    },
+    "주택인허가_지역지구구역": {
+        "data_category": "주택인허가",
+        "dataset_name": "지역지구구역",
+        "zip_path": "data/original/국토교통부_주택인허가_지역지구구역+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_주택인허가_지역지구구역.txt",
+        "zip_size_bytes": 737210
+    },
+    "주택인허가_층별개요": {
+        "data_category": "주택인허가",
+        "dataset_name": "층별개요",
+        "zip_path": "data/original/국토교통부_주택인허가_층별개요+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_주택인허가_층별개요.txt",
+        "zip_size_bytes": 39404491
+    },
+    "주택인허가_행위개요": {
+        "data_category": "주택인허가",
+        "dataset_name": "행위개요",
+        "zip_path": "data/original/국토교통부_주택인허가_행위개요+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_주택인허가_행위개요.txt",
+        "zip_size_bytes": 15199120
+    },
+    "주택인허가_행위호전유공용면적": {
+        "data_category": "주택인허가",
+        "dataset_name": "행위호전유공용면적",
+        "zip_path": "data/original/국토교통부_주택인허가_행위호전유공용면적+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_주택인허가_행위호전유공용면적.txt",
+        "zip_size_bytes": 4605768
+    },
+    "주택인허가_호별개요": {
+        "data_category": "주택인허가",
+        "dataset_name": "호별개요",
+        "zip_path": "data/original/국토교통부_주택인허가_호별개요+(2025년+12월).zip",
+        "schema_path": "data/schema/schema_주택인허가_호별개요.txt",
+        "zip_size_bytes": 71744649
     }
 }
