@@ -1,0 +1,18 @@
+서비스명
+부설주차장 (2025년 12월)
+제공기관/제공부서
+국토교통부/녹색건축과
+상세설명 표
+컬럼한글명	데이터타입	비고
+관리_허가대장_PK	VARCHAR(33)	
+대지_위치	VARCHAR(500)	
+시군구_코드	VARCHAR(5)	
+행정동_코드	VARCHAR(3)	
+법정동_코드	VARCHAR(5)	
+대지_구분_코드	VARCHAR(1)	
+번	VARCHAR(4)	
+지	VARCHAR(4)	
+지목_코드	VARCHAR(2)	
+지목_코드_명	VARCHAR(100)	
+관련_지번_명	VARCHAR(100)	
+생성_일자	VARCHAR(8)	

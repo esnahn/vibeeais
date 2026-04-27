@@ -1,0 +1,30 @@
+서비스명
+도로대장 (2025년 12월)
+제공기관/제공부서
+국토교통부/녹색건축과
+상세설명 표
+컬럼한글명	데이터타입	비고
+관리_허가대장_PK	VARCHAR(33)	
+대지_위치	VARCHAR(500)	
+시군구_코드	VARCHAR(5)	
+법정동_코드	VARCHAR(5)	
+대지_구분_코드	VARCHAR(1)	
+번	VARCHAR(4)	
+지	VARCHAR(4)	
+특수지_명	VARCHAR(200)	
+블록	VARCHAR(20)	
+로트	VARCHAR(20)	
+도로지정번호_년	VARCHAR(4)	
+도로지정번호_일련번호	NUMERIC(8)	
+도로지정_구분_코드	VARCHAR(1)	
+도로지정_구분_코드_명	VARCHAR(10)	
+도로지정_일	VARCHAR(8)	
+도로_변경_일	VARCHAR(8)	
+도로_변경_차수	NUMERIC(5)	
+도로_폐지_일	VARCHAR(8)	
+관리_시군구_코드	VARCHAR(5)	
+도시지정_변경_일	VARCHAR(8)	
+도로_길이_합계	NUMERIC(19,9)	
+도로_너비_합계	NUMERIC(19,9)	
+도로_면적_합계	NUMERIC(19,9)	
+생성_일자	VARCHAR(8)	

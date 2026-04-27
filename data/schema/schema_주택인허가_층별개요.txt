@@ -1,12 +1,13 @@
 서비스명
-지역지구구역 (2025년 12월)
+층별개요 (2025년 12월)
 제공기관/제공부서
 국토교통부/녹색건축과
 상세설명 표
 컬럼한글명	데이터타입	비고
-관리_건축물대장_PK	VARCHAR(33)	
+관리_층별_개요_PK	VARCHAR(33)	
+관리_동별_개요_PK	VARCHAR(33)	
 대지_위치	VARCHAR(500)	
-도로명_대지_위치	VARCHAR(400)	
+건물_명	VARCHAR(100)	
 시군구_코드	VARCHAR(5)	
 법정동_코드	VARCHAR(5)	
 대지_구분_코드	VARCHAR(1)	
@@ -15,10 +16,11 @@
 특수지_명	VARCHAR(200)	
 블록	VARCHAR(20)	
 로트	VARCHAR(20)	
-지역지구구역_구분_코드	VARCHAR(1)	
-지역지구구역_구분_코드_명	VARCHAR(100)	
-지역지구구역_코드	VARCHAR(6)	
-지역지구구역_코드_명	VARCHAR(100)	
-대표_여부	VARCHAR(1)	
-기타_지역지구구역	VARCHAR(300)	
+동명	VARCHAR(100)	
+층_번호	NUMERIC(4)	
+층_구분_코드	VARCHAR(2)	
+층_구분_코드_명	VARCHAR(100)	
+층_면적(㎡)	NUMERIC(19,9)	
+용도_코드	VARCHAR(5)	
+용도_코드_명	VARCHAR(100)	
 생성_일자	VARCHAR(8)	

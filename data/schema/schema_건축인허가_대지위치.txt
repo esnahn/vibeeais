@@ -1,13 +1,18 @@
 서비스명
-지역지구구역 (2025년 12월)
+대지위치 (2025년 12월)
 제공기관/제공부서
 국토교통부/녹색건축과
 상세설명 표
 컬럼한글명	데이터타입	비고
-관리_건축물대장_PK	VARCHAR(33)	
+관리_대지_위치_PK	VARCHAR(33)	
+관리_허가대장_PK	VARCHAR(33)	
+관리_동별_개요_PK	VARCHAR(33)	
+대표_여부	VARCHAR(1)	
 대지_위치	VARCHAR(500)	
-도로명_대지_위치	VARCHAR(400)	
 시군구_코드	VARCHAR(5)	
+주_동_구분_코드	VARCHAR(1)	
+주_동_구분_코드_명	VARCHAR(100)	
+행정동_코드	VARCHAR(3)	
 법정동_코드	VARCHAR(5)	
 대지_구분_코드	VARCHAR(1)	
 번	VARCHAR(4)	
@@ -15,10 +20,7 @@
 특수지_명	VARCHAR(200)	
 블록	VARCHAR(20)	
 로트	VARCHAR(20)	
-지역지구구역_구분_코드	VARCHAR(1)	
-지역지구구역_구분_코드_명	VARCHAR(100)	
-지역지구구역_코드	VARCHAR(6)	
-지역지구구역_코드_명	VARCHAR(100)	
-대표_여부	VARCHAR(1)	
-기타_지역지구구역	VARCHAR(300)	
+지목_코드	VARCHAR(2)	
+지목_코드_명	VARCHAR(100)	
+관련_지번_명	VARCHAR(100)	
 생성_일자	VARCHAR(8)	
