@@ -1,6 +1,7 @@
 import gc
 import json
 import re
+import subprocess
 import sys
 import tempfile
 import time
@@ -107,9 +108,41 @@ def convert_to_parquet():
                     z.extract(target_file, path=temp_dir)
                     extracted_txt_path = Path(temp_dir) / target_file
 
+                # Check first: run linebreak_check.awk; exits 1 if bad linebreaks exist
+                scripts_dir = base_dir / "scripts"
+                print("  Checking for internal linebreaks...")
+                check_result = subprocess.run(
+                    [
+                        "gawk",
+                        "-f",
+                        str(scripts_dir / "linebreak_check.awk"),
+                        str(extracted_txt_path),
+                    ],
+                    check=False,
+                )
+
+                if check_result.returncode == 0:
+                    # No linebreak issues: use extracted file directly (fast path)
+                    print("  No linebreak issues found — skipping repair step.")
+                    clean_txt_path = extracted_txt_path
+                else:
+                    # Linebreak issues detected: run the expensive repair step
+                    print("  Linebreak issues found — running linebreak_replace.awk...")
+                    clean_txt_path = extracted_txt_path.with_suffix(".clean.txt")
+                    subprocess.run(
+                        [
+                            "gawk",
+                            "-f",
+                            str(scripts_dir / "linebreak_replace.awk"),
+                            str(extracted_txt_path),
+                            str(clean_txt_path),
+                        ],
+                        check=True,
+                    )
+
                 print("  Converting to parquet out-of-core...")
                 _sink_csv_to_parquet(
-                    extracted_txt_path,
+                    clean_txt_path,
                     out_parquet_path,
                     columns,
                     read_dtypes,

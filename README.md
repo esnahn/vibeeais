@@ -21,6 +21,7 @@ requirements.txt          # 패키지 목록
 ## 초기 설정
 
 ```powershell
+scoop install python gawk
 python -m venv .venv
 .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
