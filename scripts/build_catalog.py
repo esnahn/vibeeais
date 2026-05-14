@@ -9,7 +9,7 @@ if sys.stdout.encoding != "utf-8":
 
 # 분석 데이터 연월에 맞추어 수정
 YEAR = "2025"
-MONTH = "12"
+MONTH = "02"
 
 
 def build_catalog():

@@ -21,7 +21,7 @@ if sys.stdout.encoding != "utf-8":
 
 # ── 다운로드할 목록(수집 대상 연월) 파일 지정 (매번 여기만 수정) ──────────────────
 YEAR = "2025"
-MONTH = "12"
+MONTH = "02"
 # ──────────────────────────────────────────────────────────────────────────
 
 BASE_URL = "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
@@ -151,6 +151,8 @@ def run():
     print(f"  신규 다운로드: {len(saved)}개")
     for path in saved:
         print(f"    - {path.name}")
+
+    print("다운로드한 파일을 검토한 뒤 build_catalog.py 를 실행하세요.")
 
 
 if __name__ == "__main__":
