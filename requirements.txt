@@ -6,6 +6,7 @@ ruff
 
 # Jupyter Notebook
 ipykernel
+nbconvert
 jupytext
 
 # Encoding Detection
