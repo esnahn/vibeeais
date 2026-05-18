@@ -21,7 +21,7 @@ if sys.stdout.encoding != "utf-8":
 
 # ── 다운로드할 목록(수집 대상 연월) 파일 지정 (매번 여기만 수정) ──────────────────
 YEAR = "2025"
-MONTH = "02"
+MONTH = "12"
 # ──────────────────────────────────────────────────────────────────────────
 
 BASE_URL = "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
