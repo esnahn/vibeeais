@@ -25,6 +25,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # %%
+# ── 분석 대상 데이터 연월 (매번 여기만 수정) ────────────────────────────────────
+YEAR = "2025"
+MONTH = "02"
+# ──────────────────────────────────────────────────────────────────────────
+
 # Parquet 파일 경로 설정
 try:
     base_dir = Path(__file__).resolve().parent.parent
@@ -34,7 +39,7 @@ except NameError:
     if base_dir.name == "notebooks":
         base_dir = base_dir.parent
 
-data_dir = base_dir / "data" / "parquet"
+data_dir = base_dir / "data" / "parquet" / f"{YEAR}{int(MONTH):02d}"
 path_건축 = data_dir / "건축인허가_기본개요.parquet"
 path_주택 = data_dir / "주택인허가_기본개요.parquet"
 

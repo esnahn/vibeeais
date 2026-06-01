@@ -29,10 +29,11 @@ def load_schema(schema_path):
 def test_full_polars_cleanup():
     base_dir = Path(__file__).resolve().parent.parent
     zip_path = (
-        base_dir / "data/original/국토교통부_건축물대장_총괄표제부+(2025년+12월).zip"
+        base_dir
+        / "data/original/202512/국토교통부_건축물대장_총괄표제부+(2025년+12월).zip"
     )
-    schema_path = base_dir / "data/schema/schema_건축물대장_총괄표제부.txt"
-    parquet_path = base_dir / "data/parquet/총괄표제부_test.parquet"
+    schema_path = base_dir / "data/schema/202512/schema_건축물대장_총괄표제부.txt"
+    parquet_path = base_dir / "data/parquet/202512/총괄표제부_test.parquet"
 
     columns, read_dtypes = load_schema(schema_path)
 

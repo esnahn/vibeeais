@@ -8,6 +8,7 @@ zip_path = (
     base_dir
     / "data"
     / "original"
+    / "202512"
     / "국토교통부_건축물대장_총괄표제부+(2025년+12월).zip"
 )
 

@@ -7796,7 +7796,7 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f23582f3">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c4c5057f">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7807,7 +7807,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=20fd32ae-62d0-42ef-91fc-d3ef8d5eee4b">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ed382097-b48b-4a1d-a090-0aa3415c1725">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7817,7 +7817,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=8c42fdbd-88f6-43a5-a0e0-33e71b8bf017">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a0b6d12b-1157-44fd-bbab-8bc57bc3fef5">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7835,7 +7835,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=02915849-7f2e-450e-9135-a25d3ca15eb6">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7e276b2f-63da-4106-b907-4dc0b175cd55">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7843,7 +7843,12 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-python"><pre><span></span><span class="c1"># Parquet 파일 경로 설정</span>
+<div class="highlight hl-python"><pre><span></span><span class="c1"># ── 분석 대상 데이터 연월 (매번 여기만 수정) ────────────────────────────────────</span>
+<span class="n">YEAR</span> <span class="o">=</span> <span class="s2">"2025"</span>
+<span class="n">MONTH</span> <span class="o">=</span> <span class="s2">"02"</span>
+<span class="c1"># ──────────────────────────────────────────────────────────────────────────</span>
+
+<span class="c1"># Parquet 파일 경로 설정</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">base_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span>
 <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
@@ -7852,7 +7857,7 @@ a.anchor-link {
     <span class="k">if</span> <span class="n">base_dir</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">"notebooks"</span><span class="p">:</span>
         <span class="n">base_dir</span> <span class="o">=</span> <span class="n">base_dir</span><span class="o">.</span><span class="n">parent</span>
 
-<span class="n">data_dir</span> <span class="o">=</span> <span class="n">base_dir</span> <span class="o">/</span> <span class="s2">"data"</span> <span class="o">/</span> <span class="s2">"parquet"</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="n">base_dir</span> <span class="o">/</span> <span class="s2">"data"</span> <span class="o">/</span> <span class="s2">"parquet"</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">YEAR</span><span class="si">}{</span><span class="nb">int</span><span class="p">(</span><span class="n">MONTH</span><span class="p">)</span><span class="si">:</span><span class="s2">02d</span><span class="si">}</span><span class="s2">"</span>
 <span class="n">path_건축</span> <span class="o">=</span> <span class="n">data_dir</span> <span class="o">/</span> <span class="s2">"건축인허가_기본개요.parquet"</span>
 <span class="n">path_주택</span> <span class="o">=</span> <span class="n">data_dir</span> <span class="o">/</span> <span class="s2">"주택인허가_기본개요.parquet"</span>
 
@@ -7867,7 +7872,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=0c10ba62-34e4-40ee-b129-303be11df58d">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=ef744308-e1bd-4cf2-a655-d148044d09ce">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7884,7 +7889,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f80eaa1a-8bb9-44c5-8250-0592d2c7276f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9b25076e-a3b5-40c5-8358-f3e6b9531e95">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7894,7 +7899,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2e8be787-8ec7-4b56-a0eb-5e507b4dc823">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=49cb9555-ad0e-4581-b5ab-425d78737013">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7976,7 +7981,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=aeff6a4d-d396-43a6-8e38-dadfeef3f631">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=eb6873a8-b75c-4ab8-a610-57dcc350091b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7988,7 +7993,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3fd5a38f-d4af-4723-bd8a-dae8bd43b889">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a4993f77-1b0a-4c84-b6c3-d45d9d5f509c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8008,7 +8013,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7d51ee13-5437-4369-a050-6b9a470fa829">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3ac815c6-eed3-42f6-b486-51388e7946f5">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8100,7 +8105,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d0b2451e-d2fb-4ab5-8d88-3feeeffa3f71">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=acc976b1-200e-43d8-ac0b-77b3e31b5767">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8178,7 +8183,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=437c2e1b-32af-4388-b98a-ede9a53f05c2">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=529bee1e-8447-4216-a61d-3686e1a7bd70">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8195,7 +8200,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2140f6ea-5694-4bb9-a63b-244f35a3175a">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=052cc8a5-1e97-4881-899b-1b7c7c5bca63">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8322,7 +8327,7 @@ len(df_valid_all) + len(df_invalid) + len(df_missing) - len(df_invalid_and_missi
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c679e298-e2c5-4dd0-83e8-6d847a55181f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8cbd07bc-f8c3-4925-9fe1-37d5f3f2aafa">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8332,7 +8337,7 @@ len(df_valid_all) + len(df_invalid) + len(df_missing) - len(df_invalid_and_missi
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=9caf5e57-7bb5-453d-b80c-362a4f3e0e14">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=5b57ffbf-c706-42b3-aba4-24323aa37dfb">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8370,7 +8375,7 @@ len(df_valid_all) + len(df_invalid) + len(df_missing) - len(df_invalid_and_missi
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=53b27f2f-bdcc-4fa7-9cca-5f402eb38f22">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=647243ba-b132-4a09-865f-676b12f6cfed">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8457,7 +8462,7 @@ dtype: object</pre>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=6c72b259-bd6d-4382-82ad-32b0949c97c7">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=49aec8dd-c468-4abf-a385-c504861839eb">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8507,7 +8512,7 @@ Max: 301234
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e6cf44af-c166-47e2-a0c4-3f2c58408871">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=7e836b7c-7a4d-4add-ab0d-07b1b4d0672e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8546,7 +8551,7 @@ Max: 301234
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ffef0538-0716-4092-9136-f746e688bc18">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=1c16f120-612a-40e2-806c-d3eb95becb78">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8641,7 +8646,7 @@ Max: 301234
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=891e1e1d-7b45-4bd1-8230-b4c53b13c4f1">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3adcfdaf-8260-4a2e-ab4f-2f7a41eaadde">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>

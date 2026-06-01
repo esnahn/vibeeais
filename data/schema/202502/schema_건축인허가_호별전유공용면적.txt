@@ -1,0 +1,32 @@
+서비스명
+호별전유공용면적 (2025년 02월)
+제공기관/제공부서
+국토교통부/녹색건축과
+상세설명 표
+컬럼한글명	데이터타입	비고
+관리_호별_전유_공용_면적_PK	VARCHAR(33)	
+관리_호별_명세_PK	VARCHAR(33)	
+대지_위치	VARCHAR(500)	
+시군구_코드	VARCHAR(5)	
+법정동_코드	VARCHAR(5)	
+대지_구분_코드	VARCHAR(1)	
+번	VARCHAR(4)	
+지	VARCHAR(4)	
+특수지_명	VARCHAR(200)	
+블록	VARCHAR(20)	
+로트	VARCHAR(20)	
+평형_구분_명	VARCHAR(100)	
+전유_공용_구분_코드	VARCHAR(1)	
+전유_공용_구분_코드_명	VARCHAR(100)	
+주_부속_구분_코드	VARCHAR(1)	
+주_부속_구분_코드_명	VARCHAR(100)	
+층_구분_코드	VARCHAR(2)	
+층_구분_코드_명	VARCHAR(100)	
+층_번호	NUMERIC(4)	
+구조_코드	VARCHAR(2)	
+구조_코드_명	VARCHAR(100)	
+주_용도_코드	VARCHAR(5)	
+주_용도_코드_명	VARCHAR(100)	
+기타_용도	VARCHAR(500)	
+면적(㎡)	NUMERIC(19,9)	
+생성_일자	VARCHAR(8)	

@@ -1,8 +1,11 @@
-# TODO: polars???
-
 from pathlib import Path
 
 import polars as pl
+
+# ──── 확인할 데이터 연월 지정 (매번 여기만 수정) ────────────────────────────────
+YEAR = "2025"
+MONTH = "12"
+# ──────────────────────────────────────────────────────────────────────────
 
 
 def show_parquet(file_path: Path):
@@ -51,7 +54,7 @@ def show_parquet(file_path: Path):
 
 def main():
     base_dir = Path(__file__).resolve().parent.parent
-    parquet_dir = base_dir / "data" / "parquet"
+    parquet_dir = base_dir / "data" / "parquet" / f"{YEAR}{int(MONTH):02d}"
 
     if not parquet_dir.exists():
         print(f"Directory not found: {parquet_dir}")

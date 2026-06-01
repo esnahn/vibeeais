@@ -21,7 +21,7 @@ if sys.stdout.encoding != "utf-8":
 
 # ── 수집 대상 연월 (매번 여기만 수정) ─────────────────────────────────────────
 YEAR = "2025"
-MONTH = "02"
+MONTH = "12"
 # ──────────────────────────────────────────────────────────────────────────
 
 _target = date(int(YEAR), int(MONTH), 1)
@@ -29,7 +29,7 @@ _end_month = int(MONTH) + 3
 _end = date(int(YEAR) + (_end_month - 1) // 12, (_end_month - 1) % 12 + 1, 1)
 
 BASE_URL = "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
-DATA_DIR = Path("e:/vibeeais/data")
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 # 카테고리 매핑 (필요할 때만 수정)
 CAT_MAP = {
@@ -145,7 +145,7 @@ def run():
         print("수집된 항목이 없습니다.")
         return
 
-    out_path = DATA_DIR / f"originals_list_{YEAR}{int(MONTH):02d}.json"
+    out_path = DATA_DIR / "original" / f"originals_list_{YEAR}{int(MONTH):02d}.json"
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump([asdict(i) for i in items], f, ensure_ascii=False, indent=2)
         f.write("\n")

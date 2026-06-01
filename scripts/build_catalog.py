@@ -7,47 +7,64 @@ from pathlib import Path
 if sys.stdout.encoding != "utf-8":
     sys.stdout.reconfigure(encoding="utf-8")
 
-# 분석 데이터 연월에 맞추어 수정
-YEAR = "2025"
-MONTH = "02"
+_PERIOD_RE = re.compile(r"^\d{6}$")
+_ZIP_RE = re.compile(r"국토교통부_(.*?)_(.*?)\+\((\d{4})년\+(\d{2})월\)\.zip")
 
 
 def build_catalog():
     base_dir = Path(__file__).resolve().parent.parent
-    original_dir = base_dir / "data" / "original"
-    schema_dir = base_dir / "data" / "schema"
+    original_base = base_dir / "data" / "original"
+    schema_base = base_dir / "data" / "schema"
     catalog_path = base_dir / "data" / "dataset_catalog.json"
 
-    # 1. List all zip files and extract the dataset name
-    # Example filename: 국토교통부_건축물대장_총괄표제부+(2025년+12월).zip
-    catalog = {}
-    zip_pattern = re.compile(rf"국토교통부_(.*?)_(.*?)\+\({YEAR}년\+{MONTH}월\)\.zip")
+    # Discover all YYYYMM period subdirectories under data/original/
+    period_dirs = sorted(
+        d for d in original_base.iterdir() if d.is_dir() and _PERIOD_RE.match(d.name)
+    )
 
-    zip_files = list(original_dir.glob("*.zip"))
-    schema_files = list(schema_dir.glob("*.txt"))
+    if not period_dirs:
+        print("No YYYYMM subdirectories found under data/original/")
+        return
 
-    for zip_file in zip_files:
-        match = zip_pattern.match(zip_file.name)
-        if match:
+    # catalog shape: { "202512_건축물대장_기본개요": { "period": "202512", ... } }
+    catalog: dict[str, dict] = {}
+
+    for period_dir in period_dirs:
+        period = period_dir.name  # e.g. "202512"
+        schema_dir = schema_base / period
+
+        zip_files = sorted(period_dir.glob("*.zip"))
+        schema_files = list(schema_dir.glob("*.txt")) if schema_dir.exists() else []
+
+        if not zip_files:
+            print(f"[{period}] WARNING: No zip files found, skipping.")
+            continue
+        if not schema_files:
+            print(
+                f"[{period}] WARNING: No schema files found in {schema_dir}, skipping."
+            )
+            continue
+
+        period_count = 0
+        for zip_file in zip_files:
+            match = _ZIP_RE.match(zip_file.name)
+            if not match:
+                print(f"[{period}] WARNING: Unexpected filename: {zip_file.name}")
+                continue
+
             data_category = match.group(1)
             dataset_name = match.group(2)
-            catalog_key = f"{data_category}_{dataset_name}"
+            catalog_key = f"{period}_{data_category}_{dataset_name}"
 
-            # 2. Find the corresponding schema file
-            expected_schema_name = f"schema_{data_category}_{dataset_name}.txt"
-
-            matched_schema = None
-            for schema_file in schema_files:
-                if schema_file.name == expected_schema_name:
-                    matched_schema = schema_file
-                    break
+            expected_schema = f"schema_{data_category}_{dataset_name}.txt"
+            matched_schema = next(
+                (s for s in schema_files if s.name == expected_schema), None
+            )
 
             if matched_schema:
-                print(f"Matched: {catalog_key}")
-                print(f"  Zip: {zip_file.name}")
-                print(f"  Schema: {matched_schema.name}")
-
+                print(f"[{period}] Matched: {data_category}_{dataset_name}")
                 catalog[catalog_key] = {
+                    "period": period,
                     "data_category": data_category,
                     "dataset_name": dataset_name,
                     "zip_path": str(zip_file.relative_to(base_dir)).replace("\\", "/"),
@@ -56,14 +73,16 @@ def build_catalog():
                     ),
                     "zip_size_bytes": zip_file.stat().st_size,
                 }
+                period_count += 1
             else:
-                print(f"WARNING: Schema not found for {catalog_key}")
-        else:
-            print(f"WARNING: File {zip_file.name} does not match expected pattern.")
+                print(
+                    f"[{period}] WARNING: Schema not found for {data_category}_{dataset_name}"
+                )
 
-    print(f"\nTotal datasets matched: {len(catalog)}")
+        print(f"[{period}] {period_count} datasets matched.\n")
 
-    # 3. Save matching results to JSON
+    print(f"Total: {len(catalog)} dataset entries across {len(period_dirs)} period(s).")
+
     with open(catalog_path, "w", encoding="utf-8") as f:
         json.dump(catalog, f, ensure_ascii=False, indent=4)
         f.write("\n")

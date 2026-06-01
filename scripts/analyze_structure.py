@@ -54,9 +54,10 @@ def load_schema(schema_path):
 
 def analyze_with_polars():
     base_dir = Path(__file__).resolve().parent.parent
-    schema_file = base_dir / "data/schema/schema_건축물대장_총괄표제부.txt"
+    schema_file = base_dir / "data/schema/202512/schema_건축물대장_총괄표제부.txt"
     zip_path = (
-        base_dir / "data/original/국토교통부_건축물대장_총괄표제부+(2025년+12월).zip"
+        base_dir
+        / "data/original/202512/국토교통부_건축물대장_총괄표제부+(2025년+12월).zip"
     )
 
     print(f"Loading schema from {schema_file}")
