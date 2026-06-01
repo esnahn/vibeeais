@@ -27,7 +27,8 @@ _end_month = int(MONTH) + 3
 _end = date(int(YEAR) + (_end_month - 1) // 12, (_end_month - 1) % 12 + 1, 1)
 
 BASE_URL = "https://www.hub.go.kr/portal/opn/lps/idx-lgcpt-pvsn-srvc-list.do"
-SCHEMA_DIR = Path("e:/vibeeais/data/schema")
+_BASE_DIR = Path(__file__).resolve().parent.parent
+SCHEMA_DIR = _BASE_DIR / "data" / "schema" / f"{YEAR}{int(MONTH):02d}"
 
 # 카테고리 코드 → 이름
 CAT_MAP = {
@@ -41,7 +42,7 @@ DATE_START = _target.strftime("%Y%m%d")
 DATE_END = _end.strftime("%Y%m%d")
 
 # 서비스명 검색어
-SEARCH_KEYWORD = f"{YEAR}년 {int(MONTH)}월"
+SEARCH_KEYWORD = f"{YEAR}년 {int(MONTH):02d}월"
 
 
 def clean_dataset_name(svc_name: str) -> str:

@@ -7,8 +7,14 @@
 ```
 data/
   original/               # 원본 zip 파일 (git 추적 제외)
+    202502/               #   └ 연월 하위 폴더 (예: 2025년 02월)
+    202512/               #   └ 연월 하위 폴더 (예: 2025년 12월)
   parquet/                # 변환된 parquet 파일 (git 추적 제외)
+    202502/               #   └ 연월 하위 폴더 (예: 2025년 02월)
+    202512/               #   └ 연월 하위 폴더 (예: 2025년 12월)
   schema/                 # 컬럼 정의 txt 파일
+    202502/               #   └ 연월 하위 폴더 (예: 2025년 02월)
+    202512/               #   └ 연월 하위 폴더 (예: 2025년 12월)
   dataset_catalog.json    # zip ↔ schema 매핑
 notebooks/                # 분석용 노트북
 results/                  # 분석 결과 저장
@@ -45,15 +51,16 @@ pip install -r requirements.txt
 
 데이터 포털(hub.go.kr)에서 스키마와 원본 `.zip` 파일을 자동으로 다운로드합니다. 각 스크립트 파일 상단의 `YEAR`와 `MONTH` 변수를 타겟 연월(예: "2025", "12")로 수정한 후 아래 순서대로 실행하세요.
 
-1. **스키마 수집**: 대상 연월의 스키마(컬럼 정보) 텍스트 파일을 `data/schema/`에 저장합니다.
+**1.1. 스키마 수집**: 대상 연월의 스키마(컬럼 정보) 텍스트 파일을 `data/schema/YYYYMM/`에 저장합니다.
    ```powershell
    python scripts/scrape_schemas.py
    ```
-2. **다운로드 목록 생성**: 다운로드 대상 항목을 파악하여 `data/originals_list_YYYYMM.json`에 목록을 저장합니다. 필요 시 JSON 파일을 열어 다운로드하지 않을 항목을 편집할 수 있습니다.
+**1.2. 다운로드 목록 생성**: 다운로드 대상 항목을 파악하여 `data/original/originals_list_YYYYMM.json`에 목록을 저장합니다. 필요 시 JSON 파일을 열어 다운로드하지 않을 항목을 편집할 수 있습니다.
    ```powershell
    python scripts/originals_list_collect.py
    ```
-3. **원본 파일 다운로드**: 생성된 목록을 바탕으로 `data/original/` 폴더에 `.zip` 파일들을 일괄 다운로드합니다.
+**1.3. 원본 파일 다운로드**: 생성된 목록을 바탕으로 `data/original/YYYYMM/` 폴더에 `.zip` 파일들을 일괄 다운로드합니다.
+   - **실패 항목 재시도**: 다운로드 중 실패한 항목이 발생하면 `originals_list_YYYYMM_failed.json` 파일에 별도로 기록됩니다. 스크립트 내부의 `RETRY_FAILED = True` 로 변경하고 다시 실행하면 실패한 항목만 재다운로드를 시도합니다. 성공 시 실패 파일은 자동 삭제됩니다.
    ```powershell
    python scripts/originals_download.py
    ```
@@ -63,8 +70,7 @@ pip install -r requirements.txt
 ### 2. 카탈로그 (재)생성
 
 `build_catalog.py`을 실행하여 zip 파일과 schema를 매핑하는 `dataset_catalog.json`을 갱신합니다.
-
-> **주의:** `build_catalog.py` 내부의 연월 변수(`YEAR`, `MONTH`)를 새 데이터의 연월로 수정하세요.
+(`data/original/` 하위의 모든 연월(YYYYMM) 폴더를 자동 탐색하여 전체 카탈로그를 빌드합니다.)
 
 ```powershell
 python scripts/build_catalog.py
@@ -75,8 +81,8 @@ python scripts/build_catalog.py
 재변환이 필요한 데이터셋의 parquet 파일만 삭제하면, 해당 항목만 재처리됩니다.
 
 ```powershell
-# 전체 삭제 후 재변환
-Remove-Item data\parquet\*.parquet
+# 특정 연월 전체 삭제 후 재변환
+Remove-Item data\parquet\202512\*.parquet
 ```
 
 ### 4. Parquet 변환 실행

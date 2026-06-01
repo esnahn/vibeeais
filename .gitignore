@@ -1,13 +1,23 @@
+### 1. Ignore rule first
+
 .venv/
 __pycache__/
 *.pyc
 .env
 
-data/original/*
-!/data/original/.gitkeep
-data/parquet/*
-!/data/parquet/.gitkeep
-data/region/original/*
-!/data/region/original/.gitkeep
+data/original/**/*.*
+data/parquet/**/*.*
+data/region/original/*.*
+
 data/tmp*/
 
+### 2. Exception rule second
+
+# 빈 폴더 유지
+!/**/.gitkeep
+
+# 원본 다운로드 리스트
+!/data/original/originals_list_*.json
+
+# 대용량 파일은 체크섬 파일만 추적
+!/**/checksums.*

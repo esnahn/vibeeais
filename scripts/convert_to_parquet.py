@@ -8,11 +8,11 @@ import time
 import zipfile
 from pathlib import Path
 
+import polars as pl
+
 # 출력 인코딩을 UTF-8로 강제하여 윈도우 터미널 한글 깨짐 방지
 if sys.stdout.encoding != "utf-8":
     sys.stdout.reconfigure(encoding="utf-8")
-
-import polars as pl
 
 
 def load_schema(schema_path):
@@ -77,9 +77,7 @@ def _sink_csv_to_parquet(csv_path, parquet_path, columns, read_dtypes, cast_dtyp
 def convert_to_parquet():
     base_dir = Path(__file__).resolve().parent.parent
     catalog_path = base_dir / "data" / "dataset_catalog.json"
-    parquet_dir = base_dir / "data" / "parquet"
-
-    parquet_dir.mkdir(parents=True, exist_ok=True)
+    parquet_base = base_dir / "data" / "parquet"
 
     with open(catalog_path, "r", encoding="utf-8") as f:
         catalog = json.load(f)
@@ -87,15 +85,21 @@ def convert_to_parquet():
     print(f"Loaded catalog with {len(catalog)} datasets.")
 
     for catalog_key, info in catalog.items():
+        period = info["period"]
         zip_path = base_dir / info["zip_path"]
         schema_path = base_dir / info["schema_path"]
-        out_parquet_path = parquet_dir / f"{catalog_key}.parquet"
+
+        parquet_dir = parquet_base / period
+        parquet_dir.mkdir(parents=True, exist_ok=True)
+
+        dataset_key = f"{info['data_category']}_{info['dataset_name']}"
+        out_parquet_path = parquet_dir / f"{dataset_key}.parquet"
 
         if out_parquet_path.exists():
-            print(f"Skipping {catalog_key}, parquet already exists.")
+            print(f"Skipping [{period}] {dataset_key}, parquet already exists.")
             continue
 
-        print(f"\nProcessing {catalog_key}...")
+        print(f"\nProcessing [{period}] {dataset_key}...")
         columns, read_dtypes, cast_dtypes = load_schema(schema_path)
 
         # Polars Lazy API out-of-core processing works best on uncompressed files
@@ -151,7 +155,7 @@ def convert_to_parquet():
                 print(f"  Successfully saved -> {out_parquet_path.name}")
 
             except Exception as e:
-                print(f"  Failed processing {catalog_key}: {e}")
+                print(f"  Failed processing {dataset_key}: {e}")
 
 
 if __name__ == "__main__":
