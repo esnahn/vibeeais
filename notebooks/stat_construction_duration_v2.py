@@ -13,21 +13,44 @@
 # ---
 
 # %% [markdown]
-# # 건축 소요기간 통계 (2025년 12월 데이터 기준)
+# # 건축 소요기간 통계 (설정된 기준 연월 기준) - V2
 #
-# 10년간 (2015년 ~ 2024년) 신축 건물을 대상으로 허가부터 착공, 착공부터 준공까지의 소요 기간을 분석
+# 설정된 YEAR 및 MONTH 변수에 해당하는 데이터를 대상으로, 10년간 신축 건물의 허가부터 착공, 착공부터 준공까지의 소요 기간을 분석합니다.
 
 # %%
 from pathlib import Path
 
 import duckdb
-import matplotlib.pyplot as plt
+import matplotlib
 import pandas as pd
 
+# Jupyter Notebook/IPython 환경(HTML 내보내기용 실행 포함)인지 확인하여 CLI 실행 시에만 Headless 백엔드(Agg) 설정
+try:
+    import builtins
+
+    if hasattr(builtins, "get_ipython"):
+        ipy = getattr(builtins, "get_ipython")()
+        is_jupyter = ipy is not None and ipy.__class__.__name__ == "ZMQInteractiveShell"
+    else:
+        is_jupyter = False
+except Exception:
+    is_jupyter = False
+
+if not is_jupyter:
+    matplotlib.use(
+        "Agg"
+    )  # CLI 실행 시 창이 열려 실행이 차단되는 것을 방지하기 위해 Headless 백엔드 사용
+
+import matplotlib.pyplot as plt  # noqa: E402
+
 # %%
-# ── 분석 대상 데이터 연월 (매번 여기만 수정) ────────────────────────────────────
+# ── 분석 대상 데이터 연월 및 집계 기간 설정 (매번 여기만 수정) ─────────────────
 YEAR = "2025"
 MONTH = "02"
+
+# 집계 대상 최근 10년 날짜 범위
+lower = "20150101"
+upper = "20241231"
 # ──────────────────────────────────────────────────────────────────────────
 
 # Parquet 파일 경로 설정
@@ -49,11 +72,6 @@ pd.options.display.unicode.east_asian_width = True
 
 # DuckDB 인메모리 연결
 con = duckdb.connect()
-
-# %%
-# 날짜 범위 설정
-lower = "20150101"
-upper = "20241231"
 
 
 # %% [markdown]
@@ -114,7 +132,7 @@ print(
 #
 # ### 데이터 전처리 조건:
 # - 집계대상: 기본개요
-# - 기간(착공일, 준공일): **최근 10년 (2015 ~ 2024년)**
+# - 기간(착공일, 준공일): **설정된 범위 (lower ~ upper)**
 # - 건축행위: **신축** (건축: 건축_구분_코드 0100, 주택: 용도_코드 부여)
 #   - 주택의 경우 아파트 단지의 최초 신축만 구분할 수 없음. 행위개요 테이블에서도 나타나지 않음. 주소도 블록 주소에서 도로명 주소로 바뀌기 때문에 주소 기준 구분도 어려움. 기본개요 용도_코드 부여 여부로 판단함. (용도_코드가 부여된 = 최초 신축 시, 연면적 사용 가능)
 # - 연면적: **30,000,000㎡ 미만** (명백한 오류 데이터 제외)
@@ -132,7 +150,7 @@ WITH base AS (
         "주_용도_코드_명",
         "건축_구분_코드",
         "건축_구분_코드_명",
-        CAST(NULLIF("연면적(㎡)", 0) AS DOUBLE) AS 연면적,
+        CAST("연면적(㎡)" AS DOUBLE) AS 연면적,  -- 기존 노트북(hub_인허가_yearly data_process duration2.py) 재현을 위해 연면적 0인 경우를 포함하여 캐스팅
         "건축_허가_일" AS 허가일,
         "착공_예정_일",
         "착공_연기_일",
@@ -145,7 +163,7 @@ WITH base AS (
         END AS 착공일
     FROM read_parquet('{path_건축.as_posix()}')
     WHERE "건축_구분_코드" IN ('0100')  -- 신축만
-      AND CAST(NULLIF("연면적(㎡)", 0) AS DOUBLE) < 30000000  -- 30_000_000 ㎡ 이상 극단치 제외
+      AND CAST("연면적(㎡)" AS DOUBLE) < 30000000  -- 기존 노트북 재현을 위해 연면적 0인 경우를 포함하여 필터링 (기준연월 202502, 분석기간 20150101~20241231 기준 mean은 430.25일)
 )
 SELECT
     pk,
@@ -157,6 +175,9 @@ SELECT
     LEFT(TRIM(시군구_코드), 2) AS 시도_코드,
     주_용도_코드,
     주_용도_코드_명,
+    LEFT(TRIM(주_용도_코드), 2) AS 용도_대분류_코드,  -- 용도별 집계를 위해 추출
+    건축_구분_코드,                                    -- 준공 10년 통합 통계 필터링/그룹화를 위해 추출
+    건축_구분_코드_명,                                 -- 준공 10년 통합 통계 필터링/그룹화를 위해 추출
     연면적,
     date_diff('day', try_strptime(허가일, '%Y%m%d'), try_strptime(착공일, '%Y%m%d')) AS 허가착공_기간,
     date_diff('day', try_strptime(착공일, '%Y%m%d'), try_strptime(준공일, '%Y%m%d')) AS 착공준공_기간,
@@ -198,7 +219,7 @@ WITH base AS (
         "용도_코드_명" AS 주_용도_코드_명,
         '0100' AS 건축_구분_코드,
         '신축' AS 건축_구분_코드_명,
-        CAST(NULLIF("연면적(㎡)", 0) AS DOUBLE) AS 연면적,
+        CAST("연면적(㎡)" AS DOUBLE) AS 연면적,  -- 기존 노트북(hub_인허가_yearly data_process duration2.py) 재현을 위해 연면적 0인 경우를 포함하여 캐스팅
         "승인_일" AS 허가일,
         "착공_예정_일",
         "착공_일" AS 원_기재_착공_일,
@@ -210,7 +231,7 @@ WITH base AS (
         END AS 착공일
     FROM read_parquet('{path_주택.as_posix()}')
     WHERE "용도_코드" IS NOT NULL  -- 주택인허가에서의 신축 추정
-      AND CAST(NULLIF("연면적(㎡)", 0) AS DOUBLE) < 30000000  -- 30_000_000 ㎡ 이상 극단치 제외
+      AND CAST("연면적(㎡)" AS DOUBLE) < 30000000  -- 기존 노트북 재현을 위해 연면적 0인 경우를 포함하여 필터링 (기준연월 202502, 분석기간 20150101~20241231 기준 mean은 430.25일)
 )
 SELECT
     pk,
@@ -222,6 +243,9 @@ SELECT
     LEFT(TRIM(시군구_코드), 2) AS 시도_코드,
     주_용도_코드,
     주_용도_코드_명,
+    LEFT(TRIM(주_용도_코드), 2) AS 용도_대분류_코드,  -- 용도별 집계를 위해 추출
+    건축_구분_코드,                                    -- 준공 10년 통합 통계 필터링/그룹화를 위해 추출
+    건축_구분_코드_명,                                 -- 준공 10년 통합 통계 필터링/그룹화를 위해 추출
     연면적,
     date_diff('day', try_strptime(허가일, '%Y%m%d'), try_strptime(착공일, '%Y%m%d')) AS 허가착공_기간,
     date_diff('day', try_strptime(착공일, '%Y%m%d'), try_strptime(준공일, '%Y%m%d')) AS 착공준공_기간,
@@ -445,8 +469,8 @@ plt.title("허가준공 기간 분포와 주요 통계량")
 plt.legend(loc="upper right")  # make it at top right
 plt.grid(True, alpha=0.3)
 
-# save
-dir_to = base_dir / "results" / "stat_construction_duration"
+# save directory configuration (Year-Month unified directory under results)
+dir_to = base_dir / "results" / "stat_construction_duration" / f"{YEAR}{int(MONTH):02d}"
 dir_to.mkdir(parents=True, exist_ok=True)
 
 plt.savefig(dir_to / "허가준공_기간_분포와_주요_통계량.png")
@@ -507,11 +531,182 @@ plt.title("허가준공 기간 분포와 주요 통계량(일부 확대)")
 plt.legend(loc="upper right")  # make it at top right
 plt.grid(True, alpha=0.3)
 
-# save
-dir_to = base_dir / "results" / "stat_construction_duration"
-dir_to.mkdir(parents=True, exist_ok=True)
-
 plt.savefig(dir_to / "허가준공_기간_분포와_주요_통계량_zoom.png")
 
 # Show the plot
 plt.show()
+
+# %% [markdown]
+# ## 3. 추가 통계 집계 및 내보내기 (V2)
+
+# %%
+print("\n=== 추가 통계 집계 및 내보내기 ===")
+
+# 1. 전국 소요기간
+# df_착공10년, df_준공10년은 이미 lower, upper에 맞춰 필터링되어 있음
+착공_result = df_착공10년.groupby("착공_년")[["허가착공_기간"]].median().astype(int)
+착공_result = 착공_result.sort_index()
+착공_result.index.name = "연도"
+
+준공_result = (
+    df_준공10년.groupby("준공_년")[["착공준공_기간", "허가준공_기간"]]
+    .median()
+    .astype(int)
+)
+준공_result = 준공_result.sort_index()
+준공_result.index.name = "연도"
+
+통합_result = pd.merge(
+    착공_result,
+    준공_result,
+    left_index=True,
+    right_index=True,
+    how="outer",
+)
+path_전국 = dir_to / "소요기간_전국.csv"
+통합_result.to_csv(path_전국, encoding="utf-8-sig")
+print(f"Saved: {path_전국.name}")
+
+# 2. 시도별 소요기간
+착공_result_시도 = (
+    df_착공10년.groupby(["시도_코드", "착공_년"])[["허가착공_기간"]]
+    .median()
+    .sort_index()
+    .rename_axis(index={"착공_년": "연도"})
+    .astype("Int64")
+)
+준공_result_시도 = (
+    df_준공10년.groupby(["시도_코드", "준공_년"])[["착공준공_기간", "허가준공_기간"]]
+    .median()
+    .sort_index()
+    .rename_axis(index={"준공_년": "연도"})
+    .astype("Int64")
+)
+통합_result_시도 = pd.merge(
+    착공_result_시도,
+    준공_result_시도,
+    left_index=True,
+    right_index=True,
+    how="outer",
+)
+path_시도 = dir_to / "소요기간_시도별.csv"
+통합_result_시도.to_csv(path_시도, encoding="utf-8-sig")
+print(f"Saved: {path_시도.name}")
+
+
+# 3. 규모별 소요기간
+def categorize_area(area):
+    if pd.isna(area):
+        return None
+    elif area < 100:
+        return "1백㎡ 미만"
+    elif area < 300:
+        return "1백㎡~3백㎡"
+    elif area < 1000:
+        return "3백㎡~1천㎡"
+    elif area < 3000:
+        return "1천~3천㎡"
+    elif area < 10000:
+        return "3천~1만㎡"
+    else:
+        return "1만㎡ 이상"
+
+
+size_order = [
+    "1백㎡ 미만",
+    "1백㎡~3백㎡",
+    "3백㎡~1천㎡",
+    "1천~3천㎡",
+    "3천~1만㎡",
+    "1만㎡ 이상",
+]
+
+df_total_규모 = df_total.copy()
+df_total_규모["규모_구분"] = df_total_규모["연면적"].apply(categorize_area)
+
+df_착공_10년_규모 = df_total_규모[
+    (df_total_규모["착공_년"] >= lower[:4])
+    & (df_total_규모["착공_년"] <= upper[:4])
+    & (df_total_규모["규모_구분"].notna())
+]
+착공_result_규모 = (
+    df_착공_10년_규모.groupby(["규모_구분", "착공_년"])[["허가착공_기간"]]
+    .median()
+    .rename_axis(index={"착공_년": "연도"})
+    .astype("Int64")
+)
+
+df_준공_10년_규모 = df_total_규모[
+    (df_total_규모["준공_년"] >= lower[:4])
+    & (df_total_규모["준공_년"] <= upper[:4])
+    & (df_total_규모["규모_구분"].notna())
+]
+준공_result_규모 = (
+    df_준공_10년_규모.groupby(["규모_구분", "준공_년"])[
+        ["착공준공_기간", "허가준공_기간"]
+    ]
+    .median()
+    .rename_axis(index={"준공_년": "연도"})
+    .astype("Int64")
+)
+
+통합_result_규모 = pd.merge(
+    착공_result_규모,
+    준공_result_규모,
+    left_index=True,
+    right_index=True,
+    how="outer",
+)
+
+# 기존 노트북(old)과 계산 결과값(수치)은 100% 동일하게 유지하되,
+# 가독성을 위해 기존의 알파벳/가나다순 정렬 대신 논리적인 면적 규모 순서(소형 -> 대형)로 행의 순서를 재정렬하여 출력합니다.
+통합_result_규모 = 통합_result_규모.reindex(
+    [
+        (size, str(year))
+        for size in size_order
+        for year in range(int(lower[:4]), int(upper[:4]) + 1)
+        if (size, str(year)) in 통합_result_규모.index
+    ]
+)
+
+path_규모 = dir_to / "소요기간_규모별.csv"
+통합_result_규모.to_csv(path_규모, encoding="utf-8-sig")
+print(f"Saved: {path_규모.name}")
+
+# 4. 용도별 소요기간
+df_착공_10년_용도 = df_착공10년[
+    (df_착공10년["용도_대분류_코드"].notna())
+    & (df_착공10년["용도_대분류_코드"] <= "99")
+]
+착공_result_용도 = (
+    df_착공_10년_용도.groupby(["용도_대분류_코드", "착공_년"])[["허가착공_기간"]]
+    .median()
+    .sort_index()
+    .rename_axis(index={"착공_년": "연도"})
+    .astype("Int64")
+)
+
+df_준공_10년_용도 = df_준공10년[
+    (df_준공10년["용도_대분류_코드"].notna())
+    & (df_준공10년["용도_대분류_코드"] <= "99")
+]
+준공_result_용도 = (
+    df_준공_10년_용도.groupby(["용도_대분류_코드", "준공_년"])[
+        ["착공준공_기간", "허가준공_기간"]
+    ]
+    .median()
+    .sort_index()
+    .rename_axis(index={"준공_년": "연도"})
+    .astype("Int64")
+)
+
+통합_result_용도 = pd.merge(
+    착공_result_용도,
+    준공_result_용도,
+    left_index=True,
+    right_index=True,
+    how="outer",
+)
+path_용도 = dir_to / "소요기간_용도별.csv"
+통합_result_용도.to_csv(path_용도, encoding="utf-8-sig")
+print(f"Saved: {path_용도.name}")
