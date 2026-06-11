@@ -11,6 +11,8 @@ data/region/original/*.*
 
 data/tmp*/
 
+results/**/*.parquet
+
 ### 2. Exception rule second
 
 # 빈 폴더 유지
