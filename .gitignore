@@ -5,6 +5,9 @@ __pycache__/
 *.pyc
 .env
 
+# duckdb temp files
+*.tmp
+
 data/original/**/*.*
 data/parquet/**/*.*
 data/region/original/*.*
