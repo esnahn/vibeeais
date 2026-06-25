@@ -1,0 +1,1 @@
+Remove-Item .\notebooks\stat_econvalue_cost_step3_print_tables.ipynb 2>$null ; $env:PYTHONUTF8 = 1 ; .\.venv\Scripts\jupytext.exe --to ipynb .\notebooks\stat_econvalue_cost_step3_print_tables.py ; .\.venv\Scripts\jupyter-nbconvert.exe --to html --execute .\notebooks\stat_econvalue_cost_step3_print_tables.ipynb --output stat_econvalue_cost_step3_print_tables_202502.html
