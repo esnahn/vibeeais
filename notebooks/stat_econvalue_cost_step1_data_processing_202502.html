@@ -7795,7 +7795,7 @@ a.anchor-link {
 </style>
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<main><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=a0ba0917">
+<main><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=03ba1cbb">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7815,7 +7815,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=3598e8d2">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d73de130">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7826,7 +7826,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=92d61023">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=08ecae0e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7875,7 +7875,7 @@ Results Directory: results\stat_econvalue\202502
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=76c0350d">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=e08dcd41">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7906,13 +7906,13 @@ Results Directory: results\stat_econvalue\202502
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>&lt;_duckdb.DuckDBPyConnection at 0x24e127f31b0&gt;</pre>
+<pre>&lt;_duckdb.DuckDBPyConnection at 0x265f2983d70&gt;</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=13124b34">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8805a9e7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7926,7 +7926,7 @@ Results Directory: results\stat_econvalue\202502
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a857ee47">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=5dce90f9">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7956,7 +7956,7 @@ Results Directory: results\stat_econvalue\202502
 <span class="s2">FROM 기본개요 b</span>
 <span class="s2">INNER JOIN 표제부 t ON b."관리_건축물대장_PK" = t."관리_건축물대장_PK"</span>
 <span class="s2">WHERE</span>
-<span class="s2">    t."사용승인_일" &gt; '19000101' AND  -- for now: maintain old criteria. (다음 내용은 나중을 위해 저장: 지금은 무시할 것) 주의! 2025년 quacklytics 코드와 다름: 사용승인일이 19000101과 같은 경우를 포함해 선별됨</span>
+<span class="s2">    t."사용승인_일" &gt;= '19000101' AND  -- 주의! 2025년 quacklytics 코드와 다름: 사용승인일이 19000101과 같은 경우를 포함해 선별됨</span>
 <span class="s2">    t."사용승인_일" &lt;= '</span><span class="si">{</span><span class="n">upper</span><span class="si">}</span><span class="s2">' AND</span>
 <span class="s2">    LENGTH(t."사용승인_일") = 8</span>
 <span class="s2">"""</span>
@@ -7977,14 +7977,14 @@ Results Directory: results\stat_econvalue\202502
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>기본개요 ⨝ 표제부 조인 및 필터링 후 건수: 7,303,104
+<pre>기본개요 ⨝ 표제부 조인 및 필터링 후 건수: 7,304,206
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=047a52fc">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=19057cfe">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7997,7 +7997,7 @@ Results Directory: results\stat_econvalue\202502
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a054c160">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ffd02446">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8015,7 +8015,7 @@ Results Directory: results\stat_econvalue\202502
 <span class="s2">    "주_용도_코드" AS "층_주_용도_코드",</span>
 <span class="s2">    "주_용도_코드_명" AS "층_주_용도_코드_명",</span>
 <span class="s2">    "기타_용도" AS "층_기타_용도",</span>
-<span class="s2">    CAST("면적(㎡)" AS DECIMAL(18,3)) AS "층_면적",</span>
+<span class="s2">    "면적(㎡)" AS "층_면적",</span>
 <span class="s2">    "주_부속_구분_코드" AS "층_주_부속_구분_코드",</span>
 <span class="s2">    "주_부속_구분_코드_명" AS "층_주_부속_구분_코드_명",</span>
 <span class="s2">    "면적_제외_여부" AS "층_면적_제외_여부",</span>
@@ -8053,7 +8053,7 @@ Results Directory: results\stat_econvalue\202502
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6f0d5cf6">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=157306f2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8063,7 +8063,7 @@ Results Directory: results\stat_econvalue\202502
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=f9ec3f34">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a277f1a3">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8126,14 +8126,14 @@ Results Directory: results\stat_econvalue\202502
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>최종 조인 결과 확인:
 총_레코드_수    총_층_면적
-  19,614,969 4,372,971,283
+  19,617,159 4,373,040,251
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b4199b56">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=a475861e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8143,7 +8143,7 @@ Results Directory: results\stat_econvalue\202502
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=0f6772cd">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d5815a1d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8183,7 +8183,7 @@ Results Directory: results\stat_econvalue\202502
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=4847c481">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=ea5daf19">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8218,7 +8218,7 @@ Results Directory: results\stat_econvalue\202502
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=6102505b">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=b69e2f66">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
