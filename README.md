@@ -10,18 +10,29 @@ data/
     202502/               #   └ 연월 하위 폴더 (예: 2025년 02월)
     202512/               #   └ 연월 하위 폴더 (예: 2025년 12월)
   parquet/                # 변환된 parquet 파일 (git 추적 제외)
-    202502/               #   └ 연월 하위 폴더 (예: 2025년 02월)
-    202512/               #   └ 연월 하위 폴더 (예: 2025년 12월)
+    202502/               #   └ 연월 하위 폴더
+    202512/               #   └ 연월 하위 폴더
   schema/                 # 컬럼 정의 txt 파일
-    202502/               #   └ 연월 하위 폴더 (예: 2025년 02월)
-    202512/               #   └ 연월 하위 폴더 (예: 2025년 12월)
+    202502/               #   └ 연월 하위 폴더
+    202512/               #   └ 연월 하위 폴더
+  region/                 # 행정구역 코드 CSV (시도·시군구·법정동)
+  replacement_cost/       # 재조달원가 관련 CSV (용도·구조·원가·내구연한)
+    2024/                 #   └ 기준연도 하위 폴더
   dataset_catalog.json    # zip ↔ schema 매핑
-notebooks/                # 분석용 노트북
+notebooks/                # 분석용 노트북 (.ipynb + .py)
 results/                  # 분석 결과 저장
-scripts/                  # 데이터 처리 스크립트
+  stat_construction_duration/  # 공사기간 통계
+  stat_econvalue/              # 경제적 가치(재조달원가) 통계
+  stat_permit_completion/      # 인허가·사용승인 통계
+scripts/                  # 데이터 처리·변환·유틸 스크립트
 tests/                    # 테스트 및 클린업 스크립트
+scratch/                  # 임시 실행용 스크립트
 auri.py                   # 표 및 그래프 스타일 설정 스크립트 (import auri 로 사용)
-requirements.txt          # 패키지 목록
+auri.mplstyle             # matplotlib 스타일 시트 (auri.py 에서 참조)
+.pre-commit-config.yaml   # pre-commit 훅 설정
+pyproject.toml            # Jupytext·Ruff 설정
+requirements.txt          # pip 패키지 목록
+freeze.txt                # pip freeze 스냅샷
 ```
 
 ## 초기 설정
@@ -106,8 +117,17 @@ python scripts/convert_to_parquet.py
 | `scripts/convert_to_parquet.py` | zip → parquet 일괄 변환 |
 | `scripts/show_parquet.py` | 변환된 전체 parquet 파일들의 스키마 및 샘플 데이터 연속 조회 |
 | `scripts/analyze_structure.py` | parquet 스키마/샘플 확인 |
+| `scripts/build_bjdong.py` | 법정동 코드 CSV 빌드 (`data/region/`) |
+| `scripts/build_kcad_sgg.py` | 한국행정구역분류 시군구 코드 CSV 빌드 (`data/region/`) |
+| `scripts/check_encoding.py` | zip 원본 파일 인코딩 진단 |
+| `scripts/compare_excel.py` | 두 Excel 파일 비교 (describe 통계 기반) |
+| `scripts/linebreak_check.awk` | 파이프 구분 텍스트의 줄바꿈 오류 탐지 (gawk) |
+| `scripts/linebreak_replace.awk` | 줄바꿈 오류 복원 (gawk) |
+| `scripts/sync_notebooks.ps1` | Jupytext 동기화 + isort/ruff 포맷팅 |
 | `tests/test_cleanup.py` | Polars 임시 파일 정리 테스트 (경로 자동 인식) |
 | `tests/delete_tmp.py` | 남은 임시 폴더 수동 삭제 |
+| `tests/test_kcad_assumptions.py` | 행정구역분류 코드 가정 검증 |
+| `tests/test_verify_linebreak_fix.py` | 줄바꿈 오류 복원 결과 검증 |
 
 ## 참고
 
