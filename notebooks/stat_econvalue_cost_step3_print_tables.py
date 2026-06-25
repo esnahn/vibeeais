@@ -40,8 +40,6 @@ except NameError:
 data_dir = base_dir / "data" / "parquet" / f"{YEAR}{int(MONTH):02d}"
 region_dir = base_dir / "data" / "region"
 results_dir = base_dir / "results" / "stat_econvalue" / f"{YEAR}{int(MONTH):02d}"
-# output_dir = base_dir / "results" / "econvalue"
-# output_dir.mkdir(parents=True, exist_ok=True)
 
 print(f"Data Directory: {data_dir.relative_to(base_dir)}")
 print(f"Region Directory: {region_dir.relative_to(base_dir)}")
@@ -203,12 +201,19 @@ print(
         },
     )
 )
-# 기존 결과 (2024년 말 기준):
+# 기존 결과 (2024년 말 기준, 사용승인_일 > '19000101'):
 # 총_동수:         7,290,246
 # 총_레코드_수:   19,560,687
 # 총_층_면적:  4,356,518,178
 # 총_재조달원가: 6,466,205,512,623,296
 # 총_잔존재조달원가: 3,893,514,963,436,596
+#
+# 수정 후 결과 (2024년 말 기준, 사용승인_일 >= '19000101'):
+# 총_동수:         7,291,347
+# 총_레코드_수:   19,562,876
+# 총_층_면적:  4,356,587,118
+# 총_재조달원가: 6,466,289,925,694,434
+# 총_잔존재조달원가: 3,893,523,348,409,434
 
 
 # %% [markdown]
