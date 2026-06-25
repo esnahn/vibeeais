@@ -7795,7 +7795,7 @@ a.anchor-link {
 </style>
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<main><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=3c312db6">
+<main><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=cf8687db">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7803,7 +7803,8 @@ a.anchor-link {
 <div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">duckdb</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
@@ -7815,7 +7816,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0118b269">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dec54463">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7828,7 +7829,7 @@ a.anchor-link {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=30699c15">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=fac75099">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7880,7 +7881,7 @@ Results Directory: results\stat_econvalue\202502
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=46da2215">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=25f6c387">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7890,7 +7891,7 @@ Results Directory: results\stat_econvalue\202502
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=020eacea">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a7a2d007">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7918,13 +7919,13 @@ Results Directory: results\stat_econvalue\202502
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>Step 1 조인 데이터 건수: 19,614,969
+<pre>Step 1 조인 데이터 건수: 19,617,159
 </pre>
 </div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=2ad543b2">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=d3b2b8b7">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7936,9 +7937,10 @@ Results Directory: results\stat_econvalue\202502
 <span class="n">df_재조달구조내구연한</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
     <span class="n">ref_dir</span> <span class="o">/</span> <span class="s2">"재조달구조내구연한.csv"</span><span class="p">,</span>
     <span class="n">encoding</span><span class="o">=</span><span class="s2">"cp949"</span><span class="p">,</span>
-    <span class="n">dtype</span><span class="o">=</span><span class="p">{</span>
-        <span class="s2">"내구연한(중앙값)"</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="p">},</span>  <span class="c1"># float for now, but will be Decimal in new-criteria branch</span>
+    <span class="n">converters</span><span class="o">=</span><span class="p">{</span>
+        <span class="c1"># Decimal instead of float: preserve all digits from text</span>
+        <span class="s2">"내구연한(중앙값)"</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="p">},</span>  <span class="c1"># NOTE: "If converters are specified, they will be applied INSTEAD of dtype conversion."</span>
 <span class="p">)</span>
 <span class="n">df_재조달구조코드연계</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
     <span class="n">ref_dir</span> <span class="o">/</span> <span class="s2">"재조달구조코드연계.csv"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"cp949"</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">str</span>
@@ -7946,12 +7948,19 @@ Results Directory: results\stat_econvalue\202502
 <span class="n">df_재조달용도구조원가내구연한</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
     <span class="n">ref_dir</span> <span class="o">/</span> <span class="s2">"재조달용도구조원가내구연한.csv"</span><span class="p">,</span>
     <span class="n">encoding</span><span class="o">=</span><span class="s2">"cp949"</span><span class="p">,</span>
-    <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s2">"재조달원가 단가(원/㎡; 중앙값)"</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="s2">"내구연한(중앙값)"</span><span class="p">:</span> <span class="nb">float</span><span class="p">},</span>  <span class="c1"># for now</span>
+    <span class="n">converters</span><span class="o">=</span><span class="p">{</span>
+        <span class="c1"># Decimal instead of float: preserve all digits from text</span>
+        <span class="s2">"재조달원가 단가(원/㎡; 중앙값)"</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+        <span class="s2">"내구연한(중앙값)"</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+    <span class="p">},</span>
 <span class="p">)</span>
 <span class="n">df_재조달용도원가</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
     <span class="n">ref_dir</span> <span class="o">/</span> <span class="s2">"재조달용도원가.csv"</span><span class="p">,</span>
     <span class="n">encoding</span><span class="o">=</span><span class="s2">"cp949"</span><span class="p">,</span>
-    <span class="n">dtype</span><span class="o">=</span><span class="p">{</span><span class="s2">"재조달원가 단가(원/㎡; 중앙값)"</span><span class="p">:</span> <span class="nb">int</span><span class="p">},</span>  <span class="c1"># for now</span>
+    <span class="n">converters</span><span class="o">=</span><span class="p">{</span>
+        <span class="c1"># Decimal instead of float: preserve all digits from text</span>
+        <span class="s2">"재조달원가 단가(원/㎡; 중앙값)"</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="p">},</span>
 <span class="p">)</span>
 <span class="n">df_재조달용도코드연계</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
     <span class="n">ref_dir</span> <span class="o">/</span> <span class="s2">"재조달용도코드연계.csv"</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"cp949"</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">str</span>
@@ -7970,14 +7979,20 @@ Results Directory: results\stat_econvalue\202502
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>참조 데이터 로드 완료
+<pre>참조 데이터 로드 완료</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d3b28fe3">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=06d8747d">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -7992,7 +8007,7 @@ Results Directory: results\stat_econvalue\202502
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=13d15134">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=fd006537">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8031,7 +8046,7 @@ Results Directory: results\stat_econvalue\202502
 
 <span class="n">con</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">"""</span>
 <span class="s2">CREATE TEMP VIEW base_sgg_joined AS</span>
-<span class="s2">SELECT </span>
+<span class="s2">SELECT</span>
 <span class="s2">    r.*,</span>
 <span class="s2">    s.시군구명</span>
 <span class="s2">FROM base_age_usage r</span>
@@ -8053,21 +8068,21 @@ Results Directory: results\stat_econvalue\202502
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>층 용도 코드 필터링 후 건수: 19,563,197
+<pre>층 용도 코드 필터링 후 건수: 19,565,386
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>유효 지역 필터링 후 건수: 19,560,687
+<pre>유효 지역 필터링 후 건수: 19,562,876
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8f799ff0">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b9e773a2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8077,7 +8092,7 @@ Results Directory: results\stat_econvalue\202502
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=5d802054">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3e5546a1">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8135,13 +8150,13 @@ Results Directory: results\stat_econvalue\202502
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>&lt;_duckdb.DuckDBPyConnection at 0x1f9927c3770&gt;</pre>
+<pre>&lt;_duckdb.DuckDBPyConnection at 0x2431277ea30&gt;</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=24987b86">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e483e526">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8151,7 +8166,7 @@ Results Directory: results\stat_econvalue\202502
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=01a4347c">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=db15208b">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8193,13 +8208,13 @@ Results Directory: results\stat_econvalue\202502
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>&lt;_duckdb.DuckDBPyConnection at 0x1f9927c3770&gt;</pre>
+<pre>&lt;_duckdb.DuckDBPyConnection at 0x2431277ea30&gt;</pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=0597c56d">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ae8c7b4c">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8209,7 +8224,7 @@ Results Directory: results\stat_econvalue\202502
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=72c8f505">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=afc90e37">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8240,12 +8255,19 @@ Results Directory: results\stat_econvalue\202502
         <span class="p">},</span>
     <span class="p">)</span>
 <span class="p">)</span>
-<span class="c1"># 기존 결과 (2024년 말 기준):</span>
+<span class="c1"># 기존 결과 (2024년 말 기준, 사용승인_일 &gt; '19000101'):</span>
 <span class="c1"># 총_동수:         7,290,246</span>
 <span class="c1"># 총_레코드_수:   19,560,687</span>
 <span class="c1"># 총_층_면적:  4,356,518,178</span>
 <span class="c1"># 총_재조달원가: 6,466,205,512,623,296</span>
 <span class="c1"># 총_잔존재조달원가: 3,893,514,963,436,596</span>
+<span class="c1">#</span>
+<span class="c1"># 수정 후 결과 (2024년 말 기준, 사용승인_일 &gt;= '19000101'):</span>
+<span class="c1"># 총_동수:         7,291,347</span>
+<span class="c1"># 총_레코드_수:   19,562,876</span>
+<span class="c1"># 총_층_면적:  4,356,587,118</span>
+<span class="c1"># 총_재조달원가: 6,466,289,925,694,434</span>
+<span class="c1"># 총_잔존재조달원가: 3,893,523,348,409,434</span>
 </pre></div>
 </div>
 </div>
@@ -8260,14 +8282,14 @@ Results Directory: results\stat_econvalue\202502
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>재조달원가 산출 결과 (Sanity Check):
   총_동수 총_레코드_수    총_층_면적         총_재조달원가     총_잔존재조달원가
-7,290,246   19,560,687 4,356,518,178 6,466,205,512,623,296 3,893,514,963,436,596
+7,291,347   19,562,876 4,356,587,118 6,466,289,925,694,434 3,893,523,348,409,434
 </pre>
 </div>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=2a927682">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=eaf3762e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8277,7 +8299,7 @@ Results Directory: results\stat_econvalue\202502
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=393ce7ad">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=a82c3571">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>

@@ -14,6 +14,7 @@
 # ---
 
 # %%
+from decimal import Decimal
 from pathlib import Path
 
 import duckdb
@@ -72,9 +73,10 @@ print(f"Step 1 조인 데이터 건수: {count_joined:,}")
 df_재조달구조내구연한 = pd.read_csv(
     ref_dir / "재조달구조내구연한.csv",
     encoding="cp949",
-    dtype={
-        "내구연한(중앙값)": float
-    },  # float for now, but will be Decimal in new-criteria branch
+    converters={
+        # Decimal instead of float: preserve all digits from text
+        "내구연한(중앙값)": lambda x: Decimal(x)
+    },  # NOTE: "If converters are specified, they will be applied INSTEAD of dtype conversion."
 )
 df_재조달구조코드연계 = pd.read_csv(
     ref_dir / "재조달구조코드연계.csv", encoding="cp949", dtype=str
@@ -82,12 +84,19 @@ df_재조달구조코드연계 = pd.read_csv(
 df_재조달용도구조원가내구연한 = pd.read_csv(
     ref_dir / "재조달용도구조원가내구연한.csv",
     encoding="cp949",
-    dtype={"재조달원가 단가(원/㎡; 중앙값)": int, "내구연한(중앙값)": float},  # for now
+    converters={
+        # Decimal instead of float: preserve all digits from text
+        "재조달원가 단가(원/㎡; 중앙값)": lambda x: Decimal(x),
+        "내구연한(중앙값)": lambda x: Decimal(x),
+    },
 )
 df_재조달용도원가 = pd.read_csv(
     ref_dir / "재조달용도원가.csv",
     encoding="cp949",
-    dtype={"재조달원가 단가(원/㎡; 중앙값)": int},  # for now
+    converters={
+        # Decimal instead of float: preserve all digits from text
+        "재조달원가 단가(원/㎡; 중앙값)": lambda x: Decimal(x)
+    },
 )
 df_재조달용도코드연계 = pd.read_csv(
     ref_dir / "재조달용도코드연계.csv", encoding="cp949", dtype=str
@@ -243,12 +252,19 @@ print(
         },
     )
 )
-# 기존 결과 (2024년 말 기준):
+# 기존 결과 (2024년 말 기준, 사용승인_일 > '19000101'):
 # 총_동수:         7,290,246
 # 총_레코드_수:   19,560,687
 # 총_층_면적:  4,356,518,178
 # 총_재조달원가: 6,466,205,512,623,296
 # 총_잔존재조달원가: 3,893,514,963,436,596
+#
+# 수정 후 결과 (2024년 말 기준, 사용승인_일 >= '19000101'):
+# 총_동수:         7,291,347
+# 총_레코드_수:   19,562,876
+# 총_층_면적:  4,356,587,118
+# 총_재조달원가: 6,466,289,925,694,434
+# 총_잔존재조달원가: 3,893,523,348,409,434
 
 # %% [markdown]
 # ### Parquet 파일 저장
