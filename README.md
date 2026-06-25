@@ -26,7 +26,6 @@ results/                  # 분석 결과 저장
   stat_permit_completion/      # 인허가·사용승인 통계
 scripts/                  # 데이터 처리·변환·유틸 스크립트
 tests/                    # 테스트 및 클린업 스크립트
-scratch/                  # 임시 실행용 스크립트
 auri.py                   # 표 및 그래프 스타일 설정 스크립트 (import auri 로 사용)
 auri.mplstyle             # matplotlib 스타일 시트 (auri.py 에서 참조)
 .pre-commit-config.yaml   # pre-commit 훅 설정
@@ -124,6 +123,7 @@ python scripts/convert_to_parquet.py
 | `scripts/linebreak_check.awk` | 파이프 구분 텍스트의 줄바꿈 오류 탐지 (gawk) |
 | `scripts/linebreak_replace.awk` | 줄바꿈 오류 복원 (gawk) |
 | `scripts/sync_notebooks.ps1` | Jupytext 동기화 + isort/ruff 포맷팅 |
+| `scripts/run_notebook.ps1` | .py 노트북 실행 → HTML 출력 (ipynb 자동 삭제) |
 | `tests/test_cleanup.py` | Polars 임시 파일 정리 테스트 (경로 자동 인식) |
 | `tests/delete_tmp.py` | 남은 임시 폴더 수동 삭제 |
 | `tests/test_kcad_assumptions.py` | 행정구역분류 코드 가정 검증 |
